@@ -20,8 +20,22 @@ st.set_page_config(page_title="Orion Live AI (Web)", layout="wide", page_icon="ð
 # --- Initialisation de l'Ã©tat de session ---
 if 'ai_instance' not in st.session_state:
     st.session_state.ai_instance = TradingAI()
+import configparser
+
+def load_ini_config():
+    config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "API_Alpaca.ini")
+    key, secret = "", ""
+    if os.path.exists(config_path):
+        config = configparser.ConfigParser()
+        config.read(config_path)
+        if 'alpaca' in config:
+            key = config['alpaca'].get('key_id', '').strip()
+            secret = config['alpaca'].get('secret_key', '').strip()
+    return key, secret
+
 if 'alpaca_config' not in st.session_state:
-    st.session_state.alpaca_config = {"api_key": "", "api_secret": "", "base_url": "https://paper-api.alpaca.markets"}
+    default_key, default_secret = load_ini_config()
+    st.session_state.alpaca_config = {"api_key": default_key, "api_secret": default_secret, "base_url": "https://paper-api.alpaca.markets"}
 if 'alpaca_connected' not in st.session_state:
     st.session_state.alpaca_connected = False
 if 'api_instance' not in st.session_state:

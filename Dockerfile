@@ -19,8 +19,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copier tout le code
 COPY . .
 
-# Exposer le port Streamlit
-EXPOSE 8501
+# Exposer le port Streamlit (3000 est le port par défaut attendu par le proxy Dokploy)
+EXPOSE 3000
 
 # Lancer Streamlit avec les bons paramètres réseau
-CMD ["streamlit", "run", "orion_streamlit.py", "--server.port=8501", "--server.address=0.0.0.0"]
+CMD ["streamlit", "run", "orion_streamlit.py", "--server.port=3000", "--server.address=0.0.0.0"]

@@ -20,6 +20,8 @@ import traceback
 import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from time import time
+import matplotlib
+matplotlib.use('Agg') # Force mode Headless pour éviter le plantage sur serveur Cloud
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 # --- MODIFIÉ v13.09 : Suppression de l'import de calibration ---
