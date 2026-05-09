@@ -23,5 +23,10 @@ COPY . .
 # Exposer le port Streamlit (3000 est le port par défaut attendu par le proxy Dokploy)
 EXPOSE 3000
 
-# Lancer Streamlit avec les bons paramètres réseau
-CMD ["streamlit", "run", "orion_streamlit.py", "--server.port=3000", "--server.address=0.0.0.0"]
+# Lancer Streamlit avec les bons paramètres réseau et désactiver CORS/XSRF pour le proxy Dokploy
+CMD ["streamlit", "run", "orion_streamlit.py", \
+     "--server.port=3000", \
+     "--server.address=0.0.0.0", \
+     "--server.headless=true", \
+     "--server.enableCORS=false", \
+     "--server.enableXsrfProtection=false"]
