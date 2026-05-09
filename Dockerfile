@@ -9,6 +9,7 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y \
     build-essential \
     curl \
+    libgomp1 \
     && rm -rf /var/lib/apt/lists/*
 
 # Copier les requirements et installer

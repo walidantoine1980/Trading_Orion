@@ -64,73 +64,24 @@ warnings.simplefilter(action='ignore', category=pd.errors.PerformanceWarning)
 # === 🌍 DICTIONNAIRE DE CONVERSION (du Dashboard) ===
 # =====================================================
 TICKER_CONVERSION_MAP = {
-    # Noms communs vers symboles Yahoo Finance (Actions FR)
-    "LVMH": "MC.PA", "TOTAL": "TTE.PA", "AIRBUS": "AIR.PA", 
-    "KERING": "KER.PA", "ENGIE": "ENGI.PA", "PEUGEOT": "STLA", # MODIFIÉ v12.27
-    "CREDIT AGRICOLE": "ACA.PA", "BNP PARIBAS": "BNP.PA", "SOCIETE GENERALE": "GLE.PA",
-    "TOTALENERGIES": "TTE.PA", "SANOFI": "SAN.PA", "L'OREAL": "OR.PA",
-    "AIR LIQUIDE": "AI.PA", "AXA": "CS.PA", "ESSILOR": "EL.PA",
-    "HERMES": "RMS.PA", "SCHNEIDER": "SU.PA", "SCHNEIDER ELECTRIC": "SU.PA",
-    "DANONE": "BN.PA", "MICHELIN": "ML.PA", "VINCI": "DG.PA",
-    "TELEPERFORMANCE": "TEP.PA", "DASSAULT SYSTEMES": "DSY.PA",
-    "STELLANTIS": "STLA", # MODIFIÉ v12.27
-    
     # Noms communs vers symboles Yahoo Finance (Actions US)
     "APPLE": "AAPL", "MICROSOFT": "MSFT", "GOOGLE": "GOOGL", "ALPHABET": "GOOGL",
     "AMAZON": "AMZN", "TESLA": "TSLA", "NVIDIA": "NVDA", "META": "META",
-    "TEAM": "TEAM", # Ajouté v12.25
+    "TEAM": "TEAM",
     
     # Indices et ETF courants
-    "CAC40": "^FCHI", "DAX": "^GDAXI", "S&P 500": "^GSPC", "SP500": "^GSPC",
-    "NASDAQ": "^IXIC", "NASDAQ 100": "QQQ", "ETF CAC40": "C40.PA",
-    "ETF S&P 500": "SPY", "AMUNDI ETF S&P 500": "500.PA",
+    "S&P 500": "^GSPC", "SP500": "^GSPC",
+    "NASDAQ": "^IXIC", "NASDAQ 100": "QQQ",
+    "ETF S&P 500": "SPY",
     
-    # Symboles communs (sans suffixe) vers symbole complet
-    "ENGI": "ENGI.PA", "OR": "OR.PA", "AI": "AI.PA", "SAN": "SAN.PA",
-    "TTE": "TTE.PA", "MC": "MC.PA", "KER": "KER.PA", "BNP": "BNP.PA",
-    "GLE": "GLE.PA", "ACA": "ACA.PA", "CS": "CS.PA", "EL": "EL.PA",
-    "RMS": "RMS.PA", "SU": "SU.PA", "BN": "BN.PA", "ML": "ML.PA", "DG": "DG.PA",
+    # Symboles communs
     "AAPL": "AAPL", "BTC-USD": "BTC-USD", "GC=F": "GC=F",
     
-    # Typos courants (Ajoutés v12.25)
-    "ENGIE.PA": "ENGI.PA", # Correction de l'erreur de ticker
-    "CAGR.PA": "ACA.PA",
-    "CAGR": "ACA.PA",
-    "OREP.PA": "OR.PA",
-    "OREP": "OR.PA",
-    "PEUP.PA": "STLA", # MODIFIÉ v12.27
-    "PEUP": "STLA", # MODIFIÉ v12.27
-    "LDOF.MI": "LDO.MI", # Leonardo
-    "LDOF": "LDO.MI",
-    
-    # NOUVEAU v13.05 (Correction Erreurs 2) : Ajout de tickers courants
-    "SAF": "SAF.PA",          # Safran
-    "BNPP": "BNP.PA",         # BNP Paribas
-    "RENA": "RNO.PA",         # Renault
-    "RNO": "RNO.PA",          # Renault (doublon pour être sûr)
-    "BAES": "BA.L",           # BAE Systems
-    "SOGN": "GLE.PA",         # Société Générale
-    "KARSN": "KARSN.IS",      # Karsan Otomotiv
-    "7201": "7201.T",         # Nissan Motor
-    "FDJU": "FDJ.PA",         # Française des Jeux
-    
-    # NOUVEAU v13.05 (Correction Erreurs 3) :
-    "FDJ": "FDJ.PA",          # Ajout du ticker nettoyé
-    "FDJ.PA": "FDJ.PA",       # NOUVEAU v13.05 (Correctif 4) : Ajout explicite
-    "MTXGN": "MTX.DE",        # MTU Aero Engines
-    "TTEF": "TTE.PA",         # Typo Total
-    "TTEF.PA": "TTE.PA",      # Typo Total
-    "RHMG": "CFR.SW",         # Richemont
-    "AIRP": "AIR.PA",         # Typo Airbus
-    "AIRP.PA": "AIR.PA",      # Typo Airbus
-    "SAABB.ST": "SAAB-B.ST",  # Typo Saab
-    "SAABB": "SAAB-B.ST",     # Typo Saab
-    
-    # Forex (Map de base, mais la logique regex gère les autres)
+    # Forex
     "EUR/USD": "EURUSD=X", "EURUSD": "EURUSD=X", "EURUSD=X": "EURUSD=X",
     "EUR/JPY": "EURJPY=X",
     "EUR/GBP": "EURGBP=X",
-    "GBP/EUR": "GBPEUR=X", # AJOUTÉ v12.28
+    "GBP/EUR": "GBPEUR=X",
     
     # Commodities
     "GC": "GC=F", "GOLD": "GC=F", 
@@ -434,8 +385,12 @@ class TradingAI:
             "ATR_Normalized", "Dist_SMA50", "PEG_Ratio", "Div_Yield",
             "Dist_VWAP", "Z_Score", "Vol_Ratio", "SMA_Slope", "Price_Vol_Impact",
             "Stoch_RSI", "Force_Index", "Ichi_Tenkan", "Keltner_Pos", "Ret_Skew",
-            # --- AJOUT v22.0 ---
-            "News_Sentiment", "Event_MA"
+            "News_Sentiment", "Event_MA",
+            # --- AJOUT v23.0 : NOUVELLES FEATURES ---
+            "Enterprise_to_Rev", "Enterprise_to_EBITDA", "Forward_EPS", "Trailing_EPS", "Book_Value",
+            "Price_to_Sales", "Short_Ratio", "ROA", "Gross_Margins", "Operating_Margins",
+            "Quick_Ratio", "Total_Debt", "Total_Cash", "EBITDA",
+            "EMA_9", "EMA_21", "MACD_Hist", "ROC_10", "Williams_R", "OBV", "Price_to_SMA_200", "Stoch_Osc"
         ]
         self.FEATURE_NAMES_NO_REGIME = [f for f in self.FEATURE_NAMES if f != "Market_Regime"]
         
@@ -549,14 +504,33 @@ class TradingAI:
                 peg = per / (earn_growth * 100)
             div_yield = info.get('dividendYield', np.nan)
             
+            # --- Nouvelles features v23.0 ---
+            ent_rev = info.get('enterpriseToRevenue', np.nan)
+            ent_ebitda = info.get('enterpriseToEbitda', np.nan)
+            fwd_eps = info.get('forwardEps', np.nan)
+            trail_eps = info.get('trailingEps', np.nan)
+            book_val = info.get('bookValue', np.nan)
+            ps_trail = info.get('priceToSalesTrailing12Months', np.nan)
+            short_ratio = info.get('shortRatio', np.nan)
+            roa = info.get('returnOnAssets', np.nan)
+            gross_m = info.get('grossMargins', np.nan)
+            op_m = info.get('operatingMargins', np.nan)
+            quick_r = info.get('quickRatio', np.nan)
+            t_debt = info.get('totalDebt', np.nan)
+            t_cash = info.get('totalCash', np.nan)
+            ebitda = info.get('ebitda', np.nan)
+            
             data_tuple = (per, rev_growth, debt_equity, profit_margin, fcf, 
                           pb, roe, earn_growth, curr_ratio, beta, 
-                          peg, div_yield)
+                          peg, div_yield,
+                          ent_rev, ent_ebitda, fwd_eps, trail_eps, book_val,
+                          ps_trail, short_ratio, roa, gross_m, op_m,
+                          quick_r, t_debt, t_cash, ebitda)
             self.fundamental_cache[ticker] = data_tuple
             return data_tuple
             
         except Exception as e:
-            fallback = (np.nan,) * 12
+            fallback = (np.nan,) * 26
             self.fundamental_cache[ticker] = fallback
             return fallback
 
@@ -668,9 +642,25 @@ class TradingAI:
 
         df["Ret_Skew"] = pct_change_series.rolling(window=20).skew()
 
+        # --- Nouvelles Features Techniques v23.0 ---
+        df["EMA_9"] = df["Close"].ewm(span=9, adjust=False).mean()
+        df["EMA_21"] = df["Close"].ewm(span=21, adjust=False).mean()
+        df["MACD_Hist"] = df["MACD"] - df["Signal"]
+        df["ROC_10"] = df["Close"].pct_change(10)
+        
+        highest_14 = df["High"].rolling(14).max()
+        lowest_14 = df["Low"].rolling(14).min()
+        df["Williams_R"] = (highest_14 - df["Close"]) / (highest_14 - lowest_14).replace(0, 1e-9) * -100
+        df["Stoch_Osc"] = (df["Close"] - lowest_14) / (highest_14 - lowest_14).replace(0, 1e-9) * 100
+        
+        df["OBV"] = (np.sign(df["Close"].diff()) * df["Volume"]).cumsum()
+        df["Price_to_SMA_200"] = df["Close"] / df["Close"].rolling(200).mean().replace(0, 1e-9)
+
         # --- Injection des Fondamentaux ---
-        if fundamentals is None: fundamentals = (np.nan,) * 12
-        (per_val, growth_val, de_val, pm_val, fcf_val, pb_val, roe_val, earn_growth_val, curr_ratio_val, beta_val, peg_val, div_val) = fundamentals
+        if fundamentals is None: fundamentals = (np.nan,) * 26
+        (per_val, growth_val, de_val, pm_val, fcf_val, pb_val, roe_val, earn_growth_val, curr_ratio_val, beta_val, peg_val, div_val,
+         ent_rev_val, ent_ebitda_val, fwd_eps_val, trail_eps_val, book_val, ps_trail_val, short_ratio_val, roa_val, gross_m_val, op_m_val,
+         quick_r_val, t_debt_val, t_cash_val, ebitda_val) = fundamentals
         
         def fix_nan(val): return 0 if pd.isna(val) else val
         
@@ -686,6 +676,21 @@ class TradingAI:
         df["Beta"] = fix_nan(beta_val)
         df["PEG_Ratio"] = fix_nan(peg_val)
         df["Div_Yield"] = fix_nan(div_val)
+        
+        df["Enterprise_to_Rev"] = fix_nan(ent_rev_val)
+        df["Enterprise_to_EBITDA"] = fix_nan(ent_ebitda_val)
+        df["Forward_EPS"] = fix_nan(fwd_eps_val)
+        df["Trailing_EPS"] = fix_nan(trail_eps_val)
+        df["Book_Value"] = fix_nan(book_val)
+        df["Price_to_Sales"] = fix_nan(ps_trail_val)
+        df["Short_Ratio"] = fix_nan(short_ratio_val)
+        df["ROA"] = fix_nan(roa_val)
+        df["Gross_Margins"] = fix_nan(gross_m_val)
+        df["Operating_Margins"] = fix_nan(op_m_val)
+        df["Quick_Ratio"] = fix_nan(quick_r_val)
+        df["Total_Debt"] = fix_nan(t_debt_val)
+        df["Total_Cash"] = fix_nan(t_cash_val)
+        df["EBITDA"] = fix_nan(ebitda_val)
         
         # --- Injection News & M&A ---
         if news_data is None:

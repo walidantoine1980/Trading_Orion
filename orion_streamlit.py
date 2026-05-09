@@ -7,6 +7,7 @@ import os
 import sys
 import contextlib
 import io
+import configparser
 
 # Ajouter le chemin courant pour les imports
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
@@ -20,7 +21,6 @@ st.set_page_config(page_title="Orion Live AI (Web)", layout="wide", page_icon="�
 # --- Initialisation de l'état de session ---
 if 'ai_instance' not in st.session_state:
     st.session_state.ai_instance = TradingAI()
-import configparser
 
 def load_ini_config():
     config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "API_Alpaca.ini")
@@ -63,7 +63,7 @@ st.markdown("""
 # ==========================================
 # === BARRE LATÉRALE (SIDEBAR) ===
 # ==========================================
-st.sidebar.title("🌌 ORION LIVE AI v16.0")
+st.sidebar.title("🌌 ORION LIVE AI v24.0")
 st.sidebar.markdown("---")
 
 st.sidebar.subheader("🔑 Connexion Alpaca")
@@ -89,37 +89,92 @@ if st.sidebar.button("🔌 Se connecter à Alpaca"):
         st.sidebar.error(f"❌ Erreur de connexion: {e}")
 
 st.sidebar.markdown("---")
-st.sidebar.subheader("⚙️ Paramètres IA")
-train_start = st.sidebar.date_input("Début Entraînement", value=datetime(2020, 1, 1))
-train_end = st.sidebar.date_input("Fin Entraînement", value=datetime.today())
-pred_start = st.sidebar.date_input("Début Prédiction", value=datetime(2023, 1, 1))
-pred_end = st.sidebar.date_input("Fin Prédiction", value=datetime.today())
-
-st.sidebar.markdown("---")
 st.sidebar.subheader("🎯 Univers d'Investissement")
+
+@st.cache_data(ttl=86400)
+def fetch_wiki_tickers_and_names(url, match_str, col_ticker, col_name):
+    import requests
+    import io
+    try:
+        r = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'})
+        tables = pd.read_html(io.StringIO(r.text), match=match_str)
+        df = tables[0]
+        tickers = df[col_ticker].tolist()
+        names = df[col_name].tolist()
+        return [f"{str(t).replace('.', '-')} - {str(n)}" for t, n in zip(tickers, names)]
+    except Exception:
+        return []
+
+def load_watchlists():
+    import glob
+    watchlists = {}
+    watchlist_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "WatchList")
+    if os.path.exists(watchlist_dir):
+        for file in glob.glob(os.path.join(watchlist_dir, "*.csv")):
+            name_file = os.path.basename(file).replace(".csv", "")
+            try:
+                df = pd.read_csv(file, sep=";")
+                if 'Symbol' in df.columns and 'Name' in df.columns:
+                    # Nettoyage et formatage "TICKER - NOM"
+                    formatted_list = []
+                    for _, row in df.dropna(subset=['Symbol']).iterrows():
+                        ticker = str(row['Symbol']).split('.')[0]
+                        name = str(row['Name']) if not pd.isna(row['Name']) else "Inconnu"
+                        formatted_list.append(f"{ticker} - {name}")
+                    watchlists[f"📂 {name_file}"] = formatted_list
+            except Exception:
+                pass
+    return watchlists
+
 portfolio_presets = {
     "Sélection Manuelle": [],
-    "CAC 40 Leaders": ["LVMH", "TOTAL", "AIRBUS", "SANOFI", "L'OREAL"],
-    "US Tech Giants": ["APPLE", "MICROSOFT", "GOOGLE", "AMAZON", "NVIDIA"]
+    "US Tech Giants": ["AAPL - Apple Inc.", "MSFT - Microsoft Corp.", "GOOGL - Alphabet Inc.", "AMZN - Amazon.com Inc.", "NVDA - NVIDIA Corp."],
+    "Dow Jones 30 (Scraping)": fetch_wiki_tickers_and_names('https://en.wikipedia.org/wiki/Dow_Jones_Industrial_Average', 'Symbol', 'Symbol', 'Company') or ["AAPL - Apple", "MSFT - Microsoft", "V - Visa", "JPM - JPMorgan Chase"],
+    "S&P 500 (Scraping)": fetch_wiki_tickers_and_names('https://en.wikipedia.org/wiki/List_of_S%26P_500_companies', 'Symbol', 'Symbol', 'Security') or ["AAPL - Apple", "MSFT - Microsoft"],
+    "Nasdaq 100 (Scraping)": fetch_wiki_tickers_and_names('https://en.wikipedia.org/wiki/Nasdaq-100', 'Ticker', 'Ticker', 'Company') or ["AAPL - Apple", "MSFT - Microsoft"],
+    "Russell 2000 (ETF)": ["IWM - iShares Russell 2000 ETF"],
+    "Nasdaq Composite (ETF)": ["ONEQ - Fidelity Nasdaq Composite Index ETF"],
+    "Indices Futures": ["ES=F - S&P 500 Futures", "NQ=F - Nasdaq 100 Futures", "YM=F - Dow Jones Futures", "RTY=F - Russell 2000 Futures", "CL=F - Crude Oil", "GC=F - Gold"],
+    "Indices Sectoriels (US)": ["XLK - Technology Select Sector SPDR", "XLV - Health Care Select Sector SPDR", "XLF - Financial Select Sector SPDR", "XLE - Energy Select Sector SPDR", "XLY - Consumer Discretionary Select Sector SPDR", "XLI - Industrial Select Sector SPDR", "XLP - Consumer Staples Select Sector SPDR", "XLU - Utilities Select Sector SPDR", "XLB - Materials Select Sector SPDR", "XLRE - Real Estate Select Sector SPDR"],
+    "Forex & Crypto": ["EURUSD=X - EUR/USD", "EURGBP=X - EUR/GBP", "GBPEUR=X - GBP/EUR", "BTC-USD - Bitcoin", "ETH-USD - Ethereum"]
 }
+
+# Ajouter les watchlists dynamiques
+portfolio_presets.update(load_watchlists())
+
 preset = st.sidebar.selectbox("Portefeuilles Prédéfinis", list(portfolio_presets.keys()))
 
 if preset != "Sélection Manuelle":
     default_assets = portfolio_presets[preset]
 else:
-    default_assets = ["AAPL"]
+    default_assets = ["AAPL - Apple Inc."]
+
+# Construire la liste exhaustive de TOUS les actifs américains, matières et devises
+all_us_stocks = set()
+for key, items in portfolio_presets.items():
+    if "Sélection Manuelle" not in key:
+        all_us_stocks.update(items)
+
+# Assurer que default_assets est dans la liste
+all_us_stocks.update(default_assets)
+all_options = sorted(list(all_us_stocks))
 
 selected_assets = st.sidebar.multiselect(
     "Actifs Sélectionnés", 
-    options=list(TICKER_CONVERSION_MAP.keys()) + ["BTC-USD", "GC=F", "EURUSD=X"],
+    options=all_options,
     default=default_assets
 )
 
-# Fonction utilitaire pour convertir les actifs sélectionnés en tickers YFinance
+if len(selected_assets) > 50:
+    st.sidebar.error(f"⚠️ AVERTISSEMENT DE PERFORMANCE: Vous avez sélectionné {len(selected_assets)} actifs. L'exécution prendra beaucoup de temps.")
+
+# Fonction utilitaire pour extraire le ticker pur pour YFinance
 def get_tickers(assets):
     tickers = []
     for asset in assets:
-        ticker = TICKER_CONVERSION_MAP.get(asset, asset)
+        # Isoler le ticker avant le " - "
+        ticker_part = asset.split(" - ")[0].strip()
+        ticker = TICKER_CONVERSION_MAP.get(ticker_part, ticker_part)
         tickers.append(ticker)
     return tickers
 
@@ -128,7 +183,7 @@ st.session_state.selected_tickers = get_tickers(selected_assets)
 # ==========================================
 # === ONGLET PRINCIPAL ===
 # ==========================================
-tab1, tab2, tab3, tab4, tab5 = st.tabs(["📊 Tableau de Bord", "🤖 Entraînement IA", "📈 Prédictions & Live Trading", "💼 Positions Alpaca", "🔄 Walk-Forward Analysis"])
+tab1, tab2, tab3, tab4 = st.tabs(["📊 Tableau de Bord", "🔄 Walk-Forward Analysis", "🔮 Prédictions du Jour", "💼 Positions Alpaca"])
 
 # --- TAB 1: TABLEAU DE BORD ---
 with tab1:
@@ -145,197 +200,21 @@ with tab1:
         
         st.subheader("Bilan des Signaux en attente")
         if not st.session_state.trade_preview_list:
-            st.info("Aucune prédiction récente n'a été générée. Allez dans l'onglet 'Prédictions & Live Trading'.")
+            st.info("Aucune prédiction récente n'a été générée. Allez dans l'onglet 'Prédictions du Jour'.")
         else:
             st.dataframe(pd.DataFrame(st.session_state.trade_preview_list), use_container_width=True)
     else:
         st.warning("⚠️ Veuillez vous connecter à Alpaca dans la barre latérale pour afficher votre tableau de bord.")
 
-# --- TAB 2: ENTRAÎNEMENT IA ---
+# --- TAB 2: WALK-FORWARD ANALYSIS ---
 with tab2:
-    st.header("Laboratoire d'Entraînement de l'IA (XGBoost Hybrid)")
-    st.markdown("Lancez l'entraînement du modèle sur les actions sélectionnées. Le modèle combinera les indicateurs techniques et les fondamentaux financiers (PER, Croissance CA).")
-    
-    if st.button("🚀 Démarrer l'Entraînement", use_container_width=True, type="primary"):
-        if not st.session_state.selected_tickers:
-            st.error("Sélectionnez au moins un actif dans la barre latérale.")
-        else:
-            with st.status("Entraînement du modèle en cours...", expanded=True) as status:
-                st.write(f"Téléchargement des données de {train_start.strftime('%Y-%m-%d')} à {train_end.strftime('%Y-%m-%d')}...")
-                
-                # Redirection du stdout pour capturer les logs de TradingAI
-                f = io.StringIO()
-                with contextlib.redirect_stdout(f):
-                    try:
-                        st.session_state.ai_instance.run_training_mode(
-                            st.session_state.selected_tickers, 
-                            train_start.strftime("%Y-%m-%d"), 
-                            train_end.strftime("%Y-%m-%d")
-                        )
-                        success = True
-                    except Exception as e:
-                        st.error(f"Erreur d'entraînement: {e}")
-                        success = False
-                
-                # Affichage des logs
-                logs = f.getvalue()
-                st.text_area("Logs de l'IA", logs, height=300)
-                
-                if success:
-                    status.update(label="✅ Entraînement terminé avec succès !", state="complete", expanded=False)
-                    st.success("Le modèle a été sauvegardé localement (`ia_model_v16.joblib`).")
-
-# --- TAB 3: PRÉDICTIONS & TRADING ---
-with tab3:
-    st.header("Moteur de Prédiction & Exécution")
-    st.markdown("Utilisez le modèle entraîné pour générer les signaux de trading du jour sur votre Watchlist.")
-    
-    if st.button("🔮 Générer les Prédictions du Jour", use_container_width=True):
-        if not st.session_state.selected_tickers:
-            st.error("Veuillez sélectionner des actifs.")
-        else:
-            with st.status("Génération des prédictions...", expanded=True) as status:
-                f = io.StringIO()
-                with contextlib.redirect_stdout(f):
-                    try:
-                        # Mappage pour l'affichage (Ticker -> Nom)
-                        reverse_map = {v: k for k, v in TICKER_CONVERSION_MAP.items()}
-                        
-                        # run_prediction_mode retourne 5 éléments dans la v22.1
-                        results_df, alloc_series, last_date, full_indicators_history, final_allocations = st.session_state.ai_instance.run_prediction_mode(
-                            st.session_state.selected_tickers,
-                            display_prefs={}, # Pas de prefs spécifiques pour l'instant
-                            ticker_to_name_map=reverse_map,
-                            use_live_data=True,
-                            custom_start_date=pred_start.strftime("%Y-%m-%d"),
-                            custom_end_date=pred_end.strftime("%Y-%m-%d")
-                        )
-                        
-                        # Construire trade_preview_list dynamiquement
-                        sorted_trade_list = []
-                        if alloc_series is not None:
-                            import re
-                            for index_name, alloc in alloc_series.items():
-                                if index_name != "CASH" and float(alloc) > 0:
-                                    match = re.search(r'\((.*?)\)', index_name)
-                                    ticker = match.group(1) if match else index_name
-                                    sorted_trade_list.append({"Ticker": ticker, "Action": "ACHETER", "Allocation": f"{float(alloc)*100:.1f}%"})
-                        
-                        st.session_state.trade_preview_list = sorted_trade_list
-                        success = True
-                    except Exception as e:
-                        st.error(f"Erreur lors de la prédiction: {e}")
-                        success = False
-                
-                logs = f.getvalue()
-                if success:
-                    status.update(label="✅ Prédictions générées !", state="complete", expanded=False)
-                    
-                    st.subheader("Résultats des Prédictions")
-                    df_res = pd.DataFrame(results_df)
-                    st.dataframe(df_res.style.map(
-                        lambda val: 'background-color: #2e7d32; color: white;' if float(val) > 0.5 else 'background-color: #c62828; color: white;',
-                        subset=['Probabilité_Hausse_IA_21J']
-                    ), use_container_width=True)
-                    
-                    st.subheader("Signaux Confirmés & Allocation Recommandée")
-                    st.table(pd.DataFrame(st.session_state.trade_preview_list))
-                else:
-                    st.text_area("Logs d'erreur", logs)
-
-    st.markdown("---")
-    st.subheader("🚀 Exécution en Direct (Alpaca)")
-    if st.button("🔥 SYNCHRONISER AVEC ALPACA", type="primary", use_container_width=True):
-        if not st.session_state.alpaca_connected:
-            st.error("Vous devez être connecté à Alpaca (Barre latérale) !")
-        elif not st.session_state.trade_preview_list:
-            st.warning("Générez d'abord des prédictions avant d'exécuter des ordres.")
-        else:
-            with st.spinner("Transmission des ordres à Alpaca..."):
-                api = st.session_state.api_instance
-                for trade in st.session_state.trade_preview_list:
-                    action = trade.get('Action')
-                    ticker = trade.get('Ticker')
-                    qty = 1 # Quantité par défaut
-                    
-                    try:
-                        # Logique simplifiée de l'ordre
-                        # Remarque: Dans l'app Tkinter, la logique était plus complexe (gestion des positions existantes).
-                        # Ceci est une version simplifiée pour le Streamlit.
-                        if action == "ACHETER":
-                            api.submit_order(
-                                symbol=ticker,
-                                qty=qty,
-                                side='buy',
-                                type='market',
-                                time_in_force='day'
-                            )
-                            st.success(f"Ordre ACHAT envoyé pour {ticker}")
-                        elif action == "VENDRE":
-                            # Vérifier si on a la position avant de vendre
-                            try:
-                                position = api.get_position(ticker)
-                                if int(position.qty) > 0:
-                                    api.submit_order(
-                                        symbol=ticker,
-                                        qty=qty,
-                                        side='sell',
-                                        type='market',
-                                        time_in_force='day'
-                                    )
-                                    st.success(f"Ordre VENTE envoyé pour {ticker}")
-                            except:
-                                st.info(f"Pas de position sur {ticker} pour vendre.")
-                    except Exception as e:
-                        st.error(f"Échec de l'ordre sur {ticker}: {e}")
-                st.success("✅ Synchronisation terminée !")
-
-# --- TAB 4: POSITIONS ALPACA ---
-with tab4:
-    st.header("Positions Ouvertes (Live)")
-    if st.button("🔄 Rafraîchir les Positions"):
-        if st.session_state.alpaca_connected:
-            try:
-                positions = st.session_state.api_instance.list_positions()
-                if not positions:
-                    st.info("Aucune position ouverte sur Alpaca.")
-                else:
-                    pos_data = []
-                    for p in positions:
-                        pos_data.append({
-                            "Actif": p.symbol,
-                            "Quantité": p.qty,
-                            "Prix Moyen": f"${float(p.avg_entry_price):.2f}",
-                            "Prix Actuel": f"${float(p.current_price):.2f}",
-                            "Valeur Marché": f"${float(p.market_value):.2f}",
-                            "PnL Total ($)": f"${float(p.unrealized_pl):.2f}",
-                            "PnL Total (%)": f"{float(p.unrealized_plpc)*100:.2f}%"
-                        })
-                    df_positions = pd.DataFrame(pos_data)
-                    st.session_state.alpaca_positions = df_positions
-            except Exception as e:
-                st.error(f"Erreur de récupération: {e}")
-        else:
-            st.error("Veuillez vous connecter à Alpaca d'abord.")
-            
-    if not st.session_state.alpaca_positions.empty:
-        st.dataframe(
-            st.session_state.alpaca_positions.style.map(
-                lambda val: 'color: green;' if float(val.strip('%$')) > 0 else 'color: red;',
-                subset=['PnL Total ($)', 'PnL Total (%)']
-            ),
-            use_container_width=True
-        )
-
-# --- TAB 5: WALK-FORWARD ANALYSIS ---
-with tab5:
     st.header("Analyse Walk-Forward (WFA)")
     st.markdown("Testez la robustesse de l'algorithme sur des périodes historiques avec un recalibrage progressif.")
     
     col1, col2 = st.columns(2)
     with col1:
         wfa_start_date = st.date_input("Date de début WFA", value=datetime(2022, 1, 1))
-        wfa_end_date = st.date_input("Date de fin WFA", value=datetime(2023, 1, 1))
+        wfa_end_date = st.date_input("Date de fin WFA", value=datetime.today())
     with col2:
         window_size = st.selectbox("Fenêtre d'entraînement (Window Size)", ["1YE", "2YE", "3YE", "5YE", "6ME"], index=0)
         step_size = st.selectbox("Pas d'avancement (Step Size)", ["1ME", "3ME", "6ME", "1YE"], index=0)
@@ -399,7 +278,7 @@ with tab5:
                                 current_prediction_date += step_offset
                                 continue
                                 
-                            # 2. Prédiction
+                            # 2. Prédiction Historique
                             results_df, alloc_series, prediction_date_str, _, final_allocations = st.session_state.ai_instance.run_prediction_mode(
                                 st.session_state.selected_tickers, {}, reverse_map, use_live_data=False,
                                 custom_start_date=train_start_date, custom_end_date=train_end_date
@@ -424,12 +303,160 @@ with tab5:
                 total_time = time.time() - total_start_time
                 if wfa_success:
                     status.update(label=f"✅ Analyse WFA terminée en {total_time:.2f}s ({step_count} recalibrages)", state="complete", expanded=False)
-                    st.success("L'analyse Walk-Forward est terminée.")
+                    st.success("Le modèle a été mis à jour via WFA. Allez dans l'onglet 'Prédictions du Jour' pour exécuter les modèles `.joblib`.")
                     
                     if wfa_results_list:
-                        st.subheader("Résultats Finaux (Historique des Allocations)")
                         wfa_df = pd.DataFrame(wfa_results_list)
+                        st.subheader("Résultats Finaux (Historique des Allocations)")
                         st.dataframe(wfa_df, use_container_width=True)
                         
                         csv = wfa_df.to_csv(index=False).encode('utf-8')
                         st.download_button("💾 Télécharger les résultats en CSV", data=csv, file_name="WFA_Results.csv", mime="text/csv")
+
+
+# --- TAB 3: PRÉDICTIONS DU JOUR ---
+with tab3:
+    st.header("🔮 Prédictions du Jour (Live)")
+    st.markdown("Ce module charge le modèle XGBoost fraîchement entraîné par la WFA (fichiers `.joblib`), télécharge les 56 indicateurs financiers des dernières 24h, et génère le plan de trade de demain.")
+
+    if st.button("🚀 GÉNÉRER LES PRÉDICTIONS & ALLOCATION", type="primary", use_container_width=True):
+        if not st.session_state.selected_tickers:
+            st.error("Sélectionnez au moins un actif dans la barre latérale.")
+        else:
+            with st.status("Traitement des données de marché...", expanded=True) as status:
+                f = io.StringIO()
+                with contextlib.redirect_stdout(f):
+                    try:
+                        reverse_map = {v: k for k, v in TICKER_CONVERSION_MAP.items()}
+                        # On appelle run_prediction_mode avec use_live_data=True
+                        results_df, alloc_series, last_date, full_indicators_history, final_allocations = st.session_state.ai_instance.run_prediction_mode(
+                            st.session_state.selected_tickers, {}, reverse_map, use_live_data=True
+                        )
+                        success = True
+                    except Exception as e:
+                        st.error(f"Erreur critique de prédiction: {e}")
+                        success = False
+                
+                logs = f.getvalue()
+                
+                if success and results_df is not None:
+                    status.update(label="✅ Modèles générés !", state="complete", expanded=False)
+                    
+                    # 1. Formatage Explicite des Probabilités
+                    st.subheader("1. Probabilités de Hausse (56 Features Analysées)")
+                    df_probs = pd.DataFrame(results_df)
+                    # Convertissons la probabilité en pourcentage et créons le signal
+                    def generate_signal(prob):
+                        if pd.isna(prob): return "N/A"
+                        val = float(prob)
+                        if val > 0.6: return "ACHAT FORT"
+                        elif val > 0.5: return "ACHAT"
+                        return "ATTENTE"
+                        
+                    df_probs['Signal'] = df_probs['Probabilité_Hausse_IA_21J'].apply(generate_signal)
+                    df_probs['Probabilité'] = df_probs['Probabilité_Hausse_IA_21J'].apply(lambda x: f"{x*100:.1f}%" if not pd.isna(x) else "N/A")
+                    
+                    # Utiliser map_func sans erreur pandas
+                    def color_signal(val):
+                        if 'ACHAT' in str(val) or (isinstance(val, str) and '%' in val and float(val.strip('%')) > 50):
+                            return 'background-color: #2e7d32; color: white;'
+                        return 'background-color: #c62828; color: white;'
+                        
+                    st.dataframe(df_probs[['Probabilité', 'Signal']].style.map(
+                        color_signal,
+                        subset=['Signal', 'Probabilité']
+                    ), use_container_width=True)
+                    
+                    # 2. Formatage Explicite de l'Allocation
+                    st.subheader("2. Allocation du Portefeuille Recommandée")
+                    st.info("L'algorithme filtre rigoureusement et alloue du Cash uniquement aux actifs ayant > 50% de probabilité de hausse.")
+                    
+                    alloc_data = []
+                    for ticker, weight in final_allocations.items():
+                        if weight > 0:
+                            alloc_data.append({"Actif": ticker, "Allocation Capital": f"{weight*100:.1f}%"})
+                    
+                    st.table(pd.DataFrame(alloc_data))
+                    
+                    # 3. Préparation pour Alpaca
+                    sorted_trade_list = []
+                    for ticker, weight in final_allocations.items():
+                        if ticker != 'CASH' and weight > 0:
+                            sorted_trade_list.append({
+                                "Ticker": ticker, 
+                                "Action": "ACHETER", 
+                                "Allocation": f"{weight*100:.1f}%"
+                            })
+                    st.session_state.trade_preview_list = sorted_trade_list
+                else:
+                    status.update(label="❌ Erreur de génération", state="error", expanded=False)
+                    st.text_area("Logs d'erreur", logs)
+                    
+    # --- Exécution Alpaca Post-Prédiction ---
+    if st.session_state.trade_preview_list:
+        st.markdown("---")
+        st.subheader("3. Exécution en Direct (Alpaca)")
+        st.markdown("L'IA propose de transmettre ces signaux au broker Alpaca via API.")
+        
+        if st.button("🔥 SYNCHRONISER AVEC ALPACA", type="primary", use_container_width=True):
+            if not st.session_state.alpaca_connected:
+                st.error("Vous devez être connecté à Alpaca (Barre latérale) !")
+            else:
+                with st.spinner("Transmission des ordres à Alpaca..."):
+                    api = st.session_state.api_instance
+                    for trade in st.session_state.trade_preview_list:
+                        action = trade.get('Action')
+                        ticker = trade.get('Ticker')
+                        qty = 1 # Quantité par défaut
+                        try:
+                            if action == "ACHETER":
+                                api.submit_order(symbol=ticker, qty=qty, side='buy', type='market', time_in_force='day')
+                                st.success(f"Ordre ACHAT envoyé pour {ticker}")
+                            elif action == "VENDRE":
+                                try:
+                                    position = api.get_position(ticker)
+                                    if int(position.qty) > 0:
+                                        api.submit_order(symbol=ticker, qty=qty, side='sell', type='market', time_in_force='day')
+                                        st.success(f"Ordre VENTE envoyé pour {ticker}")
+                                except:
+                                    st.info(f"Pas de position sur {ticker} pour vendre.")
+                        except Exception as e:
+                            st.error(f"Échec de l'ordre sur {ticker}: {e}")
+                    st.success("✅ Synchronisation terminée !")
+
+# --- TAB 4: POSITIONS ALPACA ---
+with tab4:
+    st.header("Positions Ouvertes (Live)")
+    if st.button("🔄 Rafraîchir les Positions"):
+        if st.session_state.alpaca_connected:
+            try:
+                positions = st.session_state.api_instance.list_positions()
+                if not positions:
+                    st.info("Aucune position ouverte sur Alpaca.")
+                else:
+                    pos_data = []
+                    for p in positions:
+                        pos_data.append({
+                            "Actif": p.symbol,
+                            "Quantité": p.qty,
+                            "Prix Moyen": f"${float(p.avg_entry_price):.2f}",
+                            "Prix Actuel": f"${float(p.current_price):.2f}",
+                            "Valeur Marché": f"${float(p.market_value):.2f}",
+                            "PnL Total ($)": f"${float(p.unrealized_pl):.2f}",
+                            "PnL Total (%)": f"{float(p.unrealized_plpc)*100:.2f}%"
+                        })
+                    df_positions = pd.DataFrame(pos_data)
+                    st.session_state.alpaca_positions = df_positions
+            except Exception as e:
+                st.error(f"Erreur de récupération: {e}")
+        else:
+            st.error("Veuillez vous connecter à Alpaca d'abord.")
+            
+    if not st.session_state.alpaca_positions.empty:
+        st.dataframe(
+            st.session_state.alpaca_positions.style.map(
+                lambda val: 'color: green;' if float(val.strip('%$')) > 0 else 'color: red;',
+                subset=['PnL Total ($)', 'PnL Total (%)']
+            ),
+            use_container_width=True
+        )

@@ -12,3 +12,6 @@ alpaca-trade-api
 setuptools
 wheel
 streamlit
+lxml
+html5lib
+beautifulsoup4
