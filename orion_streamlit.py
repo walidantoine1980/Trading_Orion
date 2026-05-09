@@ -128,7 +128,7 @@ st.session_state.selected_tickers = get_tickers(selected_assets)
 # ==========================================
 # === ONGLET PRINCIPAL ===
 # ==========================================
-tab1, tab2, tab3, tab4 = st.tabs(["📊 Tableau de Bord", "🤖 Entraînement IA", "📈 Prédictions & Live Trading", "💼 Positions Alpaca"])
+tab1, tab2, tab3, tab4, tab5 = st.tabs(["📊 Tableau de Bord", "🤖 Entraînement IA", "📈 Prédictions & Live Trading", "💼 Positions Alpaca", "🔄 Walk-Forward Analysis"])
 
 # --- TAB 1: TABLEAU DE BORD ---
 with tab1:
@@ -201,8 +201,8 @@ with tab3:
                         # Mappage pour l'affichage (Ticker -> Nom)
                         reverse_map = {v: k for k, v in TICKER_CONVERSION_MAP.items()}
                         
-                        # run_prediction_mode retourne 3 éléments
-                        results_df, alloc_series, sorted_trade_list = st.session_state.ai_instance.run_prediction_mode(
+                        # run_prediction_mode retourne 5 éléments dans la v22.1
+                        results_df, alloc_series, last_date, full_indicators_history, final_allocations = st.session_state.ai_instance.run_prediction_mode(
                             st.session_state.selected_tickers,
                             display_prefs={}, # Pas de prefs spécifiques pour l'instant
                             ticker_to_name_map=reverse_map,
@@ -210,6 +210,16 @@ with tab3:
                             custom_start_date=pred_start.strftime("%Y-%m-%d"),
                             custom_end_date=pred_end.strftime("%Y-%m-%d")
                         )
+                        
+                        # Construire trade_preview_list dynamiquement
+                        sorted_trade_list = []
+                        if alloc_series is not None:
+                            import re
+                            for index_name, alloc in alloc_series.items():
+                                if index_name != "CASH" and float(alloc) > 0:
+                                    match = re.search(r'\((.*?)\)', index_name)
+                                    ticker = match.group(1) if match else index_name
+                                    sorted_trade_list.append({"Ticker": ticker, "Action": "ACHETER", "Allocation": f"{float(alloc)*100:.1f}%"})
                         
                         st.session_state.trade_preview_list = sorted_trade_list
                         success = True
@@ -222,9 +232,10 @@ with tab3:
                     status.update(label="✅ Prédictions générées !", state="complete", expanded=False)
                     
                     st.subheader("Résultats des Prédictions")
-                    st.dataframe(results_df.style.applymap(
-                        lambda val: 'background-color: #2e7d32; color: white;' if val == 1 else 'background-color: #c62828; color: white;',
-                        subset=['Prédiction (1=Achat)']
+                    df_res = pd.DataFrame(results_df)
+                    st.dataframe(df_res.style.map(
+                        lambda val: 'background-color: #2e7d32; color: white;' if float(val) > 0.5 else 'background-color: #c62828; color: white;',
+                        subset=['Probabilité_Hausse_IA_21J']
                     ), use_container_width=True)
                     
                     st.subheader("Signaux Confirmés & Allocation Recommandée")
@@ -309,9 +320,116 @@ with tab4:
             
     if not st.session_state.alpaca_positions.empty:
         st.dataframe(
-            st.session_state.alpaca_positions.style.applymap(
+            st.session_state.alpaca_positions.style.map(
                 lambda val: 'color: green;' if float(val.strip('%$')) > 0 else 'color: red;',
                 subset=['PnL Total ($)', 'PnL Total (%)']
             ),
             use_container_width=True
         )
+
+# --- TAB 5: WALK-FORWARD ANALYSIS ---
+with tab5:
+    st.header("Analyse Walk-Forward (WFA)")
+    st.markdown("Testez la robustesse de l'algorithme sur des périodes historiques avec un recalibrage progressif.")
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        wfa_start_date = st.date_input("Date de début WFA", value=datetime(2022, 1, 1))
+        wfa_end_date = st.date_input("Date de fin WFA", value=datetime(2023, 1, 1))
+    with col2:
+        window_size = st.selectbox("Fenêtre d'entraînement (Window Size)", ["1YE", "2YE", "3YE", "5YE", "6ME"], index=0)
+        step_size = st.selectbox("Pas d'avancement (Step Size)", ["1ME", "3ME", "6ME", "1YE"], index=0)
+        
+    if st.button("🔄 Lancer l'Analyse WFA", use_container_width=True, type="primary"):
+        if not st.session_state.selected_tickers:
+            st.error("Sélectionnez au moins un actif dans la barre latérale.")
+        else:
+            with st.status("Exécution WFA en cours...", expanded=True) as status:
+                st.write(f"Analyse du {wfa_start_date.strftime('%Y-%m-%d')} au {wfa_end_date.strftime('%Y-%m-%d')}...")
+                
+                progress_bar = st.progress(0)
+                status_text = st.empty()
+                log_text = st.empty()
+                
+                # Conversion des dates
+                current_prediction_date = pd.to_datetime(wfa_start_date)
+                end_date_pd = pd.to_datetime(wfa_end_date)
+                
+                try:
+                    window_offset = pd.tseries.frequencies.to_offset(window_size)
+                    step_offset = pd.tseries.frequencies.to_offset(step_size)
+                except ValueError as e:
+                    st.error(f"Format d'offset invalide : {e}")
+                    st.stop()
+                
+                total_steps = 0
+                temp_date = current_prediction_date
+                while temp_date <= end_date_pd:
+                    total_steps += 1
+                    temp_date += step_offset
+                
+                step_count = 0
+                wfa_results_list = []
+                f = io.StringIO()
+                
+                reverse_map = {v: k for k, v in TICKER_CONVERSION_MAP.items()}
+                import time
+                total_start_time = time.time()
+                
+                with contextlib.redirect_stdout(f):
+                    try:
+                        while current_prediction_date <= end_date_pd:
+                            step_count += 1
+                            progress = min(step_count / max(1, total_steps), 1.0)
+                            progress_bar.progress(progress)
+                            
+                            train_end_date = current_prediction_date.strftime('%Y-%m-%d')
+                            train_start_date = (current_prediction_date - window_offset).strftime('%Y-%m-%d')
+                            
+                            status_text.text(f"Étape {step_count}/{total_steps} | Entraînement: {train_start_date} -> {train_end_date}")
+                            print(f"\n--- ÉTAPE WFA #{step_count} : RECALIBRAGE ---")
+                            
+                            # 1. Entraînement
+                            success, model_trained = st.session_state.ai_instance.run_training_mode(
+                                st.session_state.selected_tickers, train_start_date, train_end_date
+                            )
+                            
+                            if not success:
+                                print(f"Échec entraînement à l'étape #{step_count}.")
+                                current_prediction_date += step_offset
+                                continue
+                                
+                            # 2. Prédiction
+                            results_df, alloc_series, prediction_date_str, _, final_allocations = st.session_state.ai_instance.run_prediction_mode(
+                                st.session_state.selected_tickers, {}, reverse_map, use_live_data=False,
+                                custom_start_date=train_start_date, custom_end_date=train_end_date
+                            )
+                            
+                            if results_df is not None:
+                                for ticker, weight in final_allocations.items():
+                                    if ticker != 'CASH':
+                                        prob = results_df.loc[results_df.index.str.contains(f'({ticker})', regex=False)].iloc[0] if f"{reverse_map.get(ticker, ticker)} ({ticker})" in results_df.index else np.nan
+                                        wfa_results_list.append({'Date': prediction_date_str, 'Ticker': ticker, 'Allocation': weight, 'Probabilite_Hausse': prob})
+                                    elif weight > 0:
+                                        wfa_results_list.append({'Date': prediction_date_str, 'Ticker': 'CASH', 'Allocation': weight, 'Probabilite_Hausse': 0.0})
+                            
+                            current_prediction_date += step_offset
+                            log_text.text_area("Logs WFA (Live)", f.getvalue(), height=300)
+                            
+                        wfa_success = True
+                    except Exception as e:
+                        st.error(f"Erreur critique WFA: {e}")
+                        wfa_success = False
+                
+                total_time = time.time() - total_start_time
+                if wfa_success:
+                    status.update(label=f"✅ Analyse WFA terminée en {total_time:.2f}s ({step_count} recalibrages)", state="complete", expanded=False)
+                    st.success("L'analyse Walk-Forward est terminée.")
+                    
+                    if wfa_results_list:
+                        st.subheader("Résultats Finaux (Historique des Allocations)")
+                        wfa_df = pd.DataFrame(wfa_results_list)
+                        st.dataframe(wfa_df, use_container_width=True)
+                        
+                        csv = wfa_df.to_csv(index=False).encode('utf-8')
+                        st.download_button("💾 Télécharger les résultats en CSV", data=csv, file_name="WFA_Results.csv", mime="text/csv")
