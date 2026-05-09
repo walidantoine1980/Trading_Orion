@@ -47,8 +47,11 @@ except ImportError:
     # On ne quitte pas, l'utilisateur peut vouloir seulement entraîner
     
 # --- Imports pour l'IHM (v11 + Dashboard) ---
-import tkinter as tk
-from tkinter import ttk, messagebox, filedialog, scrolledtext
+try:
+    import tkinter as tk
+    from tkinter import ttk, messagebox, filedialog, scrolledtext
+except ImportError:
+    pass # Permet l'importation de la classe TradingAI sur serveur Headless sans erreur
 
 # --- Ignorer les avertissements ---
 warnings.simplefilter(action='ignore', category=FutureWarning)
