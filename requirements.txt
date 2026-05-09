@@ -1,0 +1,11 @@
+yfinance
+pandas
+numpy
+xgboost
+nltk
+matplotlib
+scikit-learn
+joblib
+requests
+GoogleNews
+alpaca-trade-api

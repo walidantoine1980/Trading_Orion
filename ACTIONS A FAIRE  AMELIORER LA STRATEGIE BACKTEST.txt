@@ -1,0 +1,73 @@
+ACTIONS A FAIRE : AMELIORER LA STRATEGIE BACKTEST
+
+Bonjour !
+
+C'est une excellente question, et c'est le moment le plus important de tout processus de backtest.
+
+**Ce n'est pas un "phénomène bizarre", c'est le résultat le plus normal et le plus précieux que vous puissiez obtenir.**
+
+Ce que vous venez de découvrir est la raison fondamentale pour laquelle nous utilisons des benchmarks. Votre test WFA (Walk-Forward) a parfaitement fonctionné : il a prouvé que, **dans sa configuration actuelle**, votre stratégie d'IA est moins performante qu'une stratégie "naïve".
+
+La plupart des gens n'arrivent jamais à cette étape de test robuste. Vous, si. C'est une réussite, pas un échec !
+
+La performance de l'IA est très loin du benchmark ? C'est une information cruciale. Cela signifie que la complexité (XGBoost, features, WFA) **détruit de la valeur** par rapport à la simplicité (acheter et conserver à parts égales).
+
+### "Que faire ?" – Un Plan d'Action Diagnostique
+
+Votre code est un laboratoire. Il est temps de changer les hypothèses. L'écart est grand, donc le problème est probablement fondamental.
+
+Voici les étapes de débogage, du plus probable au moins probable :
+
+#### 1. (Le plus probable) : Votre "Cible" (Target) est trop difficile ou mal définie
+
+Dans votre code, votre IA essaie de prédire ceci :
+`df["Target"] = (df["Close"].pct_change(21).shift(-21) > 0).astype(int)`
+
+**Problème :** Vous demandez à l'IA "le prix sera-t-il plus haut dans 21 jours ? (Oui/Non)".
+C'est une question binaire de très faible qualité. Une hausse de +0.01% et une hausse de +50% sont toutes les deux "1". L'IA ne peut pas distinguer un signal "fort" d'un signal "faible". Il est très probable que l'IA soit "correcte" 50% du temps, tout comme le hasard, et qu'elle n'apprenne rien d'utile.
+
+**Action à tester :**
+* **Changer la cible :** Rendez-la plus significative. Demandez à l'IA de ne prédire que les *grosses* hausses.
+    * `df["Target"] = (df["Close"].pct_change(21).shift(-21) > 0.05).astype(int)` (Prédire une hausse de >5%)
+* **Utiliser une classification (mieux) :** Au lieu de Oui/Non, créez 3 classes : "Perte", "Neutre", "Gain". (ex: les 33% plus basses performances, les 33% du milieu, les 33% plus hautes). Le modèle XGBoost devra prédire la classe "2".
+
+#### 2. Vos "Features" (Indicateurs) n'ont aucun pouvoir prédictif
+
+Votre IA utilise des indicateurs standards (RSI, MACD, SMA). Il est très connu que ces indicateurs, *seuls*, ont très peu de pouvoir prédictif pour l'avenir (ils décrivent le *passé*).
+
+Votre modèle apprend probablement du "bruit".
+
+**Action à tester :**
+* **Regardez la "Synthèse Automatique" (Point 4) et le graphique "Importance des Features" (Graphique 11).**
+* **Question :** Y a-t-il une seule feature qui domine tout (ex: `Momentum_1D` à 90%) ? Si oui, votre IA est juste une simple stratégie de momentum.
+* **Action :** Essayez de **simplifier drastiquement**. Ne gardez que 2 ou 3 features. Par exemple : `Momentum_1D`, `SMA_20` et `Market_Regime`. Re-lancez le test. Est-ce mieux ou pire ?
+
+#### 3. Votre "Mode CASH" vous pénalise (Hypothèse de Simulation)
+
+* **Le benchmark "poids égaux" est *toujours* investi à 100%.** Si le marché monte, il monte.
+* **Votre IA (lignes 694-703) peut se mettre en CASH.** Si la probabilité moyenne est faible, elle reste sur la touche.
+
+**Phénomène possible :** Nous sommes peut-être dans un marché haussier lent ("grinding bull market"). Votre IA, trop prudente, se met en "CASH" et rate toute la hausse, tandis que le benchmark "naïf" capture passivement cette hausse.
+
+**Action à tester :**
+* **Regardez le "Graphique d'Allocations" (Graphique 2).**
+* **Question :** Est-ce que votre IA passe son temps en "CASH" (la barre grise/blanche) ?
+* **Si oui :** L'IA est trop pessimiste. Vous pouvez "tricher" en forçant une allocation minimale ou en ajustant le seuil de décision (ex: `prob - 0.45` au lieu de `prob - 0.5`).
+
+#### 4. Vos TP/SL sont mal calibrés
+
+Vos paramètres sont fixes : `TAKE_PROFIT_PCT = 0.15` (15%) et `STOP_LOSS_PCT = 0.08` (8%).
+
+**Phénomène possible :** Votre IA peut avoir raison (prédire une hausse), mais l'actif est volatile. Il touche le SL à -8% (sortant de la position) avant de finalement monter de 20%. Vous avez *raison* sur la direction, mais *tort* sur la simulation.
+
+**Action à tester :**
+* **Regardez les signaux TP/SL (Point 2b de la synthèse).** Avez-vous beaucoup plus de Stop-Loss (rouges) que de Take-Profit (verts) ?
+* **Action :** Essayez d'élargir le SL (ex: 15%) ou de supprimer complètement le TP/SL. Laissez l'IA gérer la sortie en allouant 0% à l'actif lors du prochain rebalancement.
+
+### Mon Conseil (Par où commencer)
+
+**Commencez par la Cible (Point 1).** C'est presque certainement le problème le plus important.
+
+Votre script de backtest fonctionne, et il vous a donné la réponse la plus importante : **votre hypothèse de modèle actuelle est fausse.**
+
+C'est le début du vrai travail de recherche ! Changez l'hypothèse (la `Target`) et relancez le test.

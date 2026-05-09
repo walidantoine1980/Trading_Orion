@@ -1,0 +1,1139 @@
+======================================================================
+ENREGISTREMENT DU : 2025-11-17 20:39:31
+======================================================================
+Equity total du compte : $969,994.46
+----------------------------------------
+Positions Actuelles (Portefeuille)
+  - ANET: $76,209.66 (Prix d'achat: $132.03)
+  - BAC: $95,019.55 (Prix d'achat: $52.39)
+  - BIIB: $93,278.86 (Prix d'achat: $168.00)
+  - CHTR: $34,967.77 (Prix d'achat: $202.91)
+  - COF: $46,883.18 (Prix d'achat: $210.64)
+  - CTAS: $3,957.51 (Prix d'achat: $185.64)
+  - CTSH: $44,275.71 (Prix d'achat: $72.53)
+  - F: $77,463.56 (Prix d'achat: $13.16)
+  - FANG: $75,998.47 (Prix d'achat: $148.91)
+  - FITB: $102,239.22 (Prix d'achat: $42.45)
+  - NVDA: $28,952.49 (Prix d'achat: $185.48)
+  - ON: $80,721.85 (Prix d'achat: $46.57)
+  - PANW: $51,640.56 (Prix d'achat: $205.75)
+  - PYPL: $56,770.35 (Prix d'achat: $62.47)
+  - SMCI: $73,748.24 (Prix d'achat: $35.53)
+----------------------------------------
+Allocations Cibles (IA)
+  - ADBE: 0.00%
+  - AMGN: 3.08%
+  - AOS: 10.32%
+  - BAH: 0.00%
+  - BKE: 11.72%
+  - CHKP: 5.02%
+  - CON: 3.31%
+  - CSL: 0.00%
+  - DECK: 0.00%
+  - EXEL: 8.25%
+  - FDS: 0.00%
+  - FTDR: 1.65%
+  - GDDY: 0.00%
+  - HAE: 0.00%
+  - IT: 0.00%
+  - OSK: 0.00%
+  - PYPL: 1.20%
+  - QLYS: 7.96%
+  - UNH: 0.00%
+  - VSCO: 7.87%
+  - CASH: 39.63%
+----------------------------------------
+--- Ordres de Rebalancement Requis ---
+  [CONSERVER] : CSL (Allocation déjà correcte)
+  [ACHAT] : FTDR (cible: FTDR)
+    Montant : $16,013.58
+    Nouvelle valeur cible : $16,013.58
+  [VENTE] : PYPL (cible: PYPL)
+    Montant : $45,162.48
+    Nouvelle valeur cible : $11,607.87
+    Profit/Perte Réalisé Estimé: $-622.41
+  [ACHAT] : QLYS (cible: QLYS)
+    Montant : $77,191.30
+    Nouvelle valeur cible : $77,191.30
+  [ACHAT] : BKE (cible: BKE)
+    Montant : $113,722.22
+    Nouvelle valeur cible : $113,722.22
+  [CONSERVER] : FDS (Allocation déjà correcte)
+  [ACHAT] : EXEL (cible: EXEL)
+    Montant : $80,052.39
+    Nouvelle valeur cible : $80,052.39
+  [ACHAT] : CON (cible: CON)
+    Montant : $32,093.29
+    Nouvelle valeur cible : $32,093.29
+  [CONSERVER] : OSK (Allocation déjà correcte)
+  [CONSERVER] : BAH (Allocation déjà correcte)
+  [CONSERVER] : DECK (Allocation déjà correcte)
+  [CONSERVER] : HAE (Allocation déjà correcte)
+  [ACHAT] : AOS (cible: AOS)
+    Montant : $100,084.08
+    Nouvelle valeur cible : $100,084.08
+  [CONSERVER] : UNH (Allocation déjà correcte)
+  [ACHAT] : VSCO (cible: VSCO)
+    Montant : $76,337.01
+    Nouvelle valeur cible : $76,337.01
+  [ACHAT] : CHKP (cible: CHKP)
+    Montant : $48,655.20
+    Nouvelle valeur cible : $48,655.20
+  [ACHAT] : AMGN (cible: AMGN)
+    Montant : $29,838.58
+    Nouvelle valeur cible : $29,838.58
+  [CONSERVER] : IT (Allocation déjà correcte)
+  [CONSERVER] : GDDY (Allocation déjà correcte)
+  [CONSERVER] : ADBE (Allocation déjà correcte)
+  [LIQUIDATION] : SMCI (Non dans les cibles IA)
+    Montant : $73,748.24
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-3,703.82
+  [LIQUIDATION] : BIIB (Non dans les cibles IA)
+    Montant : $93,278.86
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-1,727.65
+  [LIQUIDATION] : PANW (Non dans les cibles IA)
+    Montant : $51,640.56
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-756.35
+  [LIQUIDATION] : FITB (Non dans les cibles IA)
+    Montant : $102,239.22
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-2,770.58
+  [LIQUIDATION] : F (Non dans les cibles IA)
+    Montant : $77,463.56
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-1,678.46
+  [LIQUIDATION] : CTSH (Non dans les cibles IA)
+    Montant : $44,275.71
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-558.81
+  [LIQUIDATION] : COF (Non dans les cibles IA)
+    Montant : $46,883.18
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-2,181.40
+  [LIQUIDATION] : FANG (Non dans les cibles IA)
+    Montant : $75,998.47
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-869.88
+  [LIQUIDATION] : CHTR (Non dans les cibles IA)
+    Montant : $34,967.77
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-24.88
+  [LIQUIDATION] : NVDA (Non dans les cibles IA)
+    Montant : $28,952.49
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-132.96
+  [LIQUIDATION] : CTAS (Non dans les cibles IA)
+    Montant : $3,957.51
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-30.72
+  [LIQUIDATION] : ON (Non dans les cibles IA)
+    Montant : $80,721.85
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-1,018.02
+  [LIQUIDATION] : BAC (Non dans les cibles IA)
+    Montant : $95,019.55
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-1,260.20
+  [LIQUIDATION] : ANET (Non dans les cibles IA)
+    Montant : $76,209.66
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-3,816.73
+----------------------------------------
+Note: Les P/L sont des estimations avant exécution.
+
+
+======================================================================
+ENREGISTREMENT DU : 2025-11-26 16:10:07
+======================================================================
+Equity total du compte : $988,597.65
+----------------------------------------
+Positions Actuelles (Portefeuille)
+  - ANET: $76,101.04 (Prix d'achat: $132.03)
+  - BAC: $97,151.31 (Prix d'achat: $52.39)
+  - BIIB: $103,416.11 (Prix d'achat: $168.00)
+  - CHTR: $34,340.05 (Prix d'achat: $202.91)
+  - COF: $50,571.64 (Prix d'achat: $210.64)
+  - CTAS: $3,945.69 (Prix d'achat: $185.64)
+  - CTSH: $47,564.09 (Prix d'achat: $72.53)
+  - F: $79,232.23 (Prix d'achat: $13.16)
+  - FANG: $76,772.81 (Prix d'achat: $148.91)
+  - FITB: $0.08 (Prix d'achat: $42.45)
+  - NVDA: $0.00 (Prix d'achat: $185.48)
+  - ON: $85,776.84 (Prix d'achat: $46.57)
+  - PANW: $46,991.08 (Prix d'achat: $205.75)
+  - PYPL: $0.03 (Prix d'achat: $62.47)
+  - SMCI: $9.03 (Prix d'achat: $35.53)
+----------------------------------------
+Allocations Cibles (IA)
+  - ADBE: 0.00%
+  - BAH: 0.00%
+  - BKE: 18.42%
+  - CSL: 0.00%
+  - EXEL: 14.35%
+  - HAE: 0.00%
+  - IT: 0.00%
+  - OSK: 0.00%
+  - PYPL: 17.36%
+  - CASH: 49.88%
+----------------------------------------
+--- Ordres de Rebalancement Requis ---
+  [CONSERVER] : HAE (Allocation déjà correcte)
+  [CONSERVER] : OSK (Allocation déjà correcte)
+  [ACHAT] : BKE (cible: BKE)
+    Montant : $182,070.39
+    Nouvelle valeur cible : $182,070.39
+  [CONSERVER] : CSL (Allocation déjà correcte)
+  [CONSERVER] : IT (Allocation déjà correcte)
+  [ACHAT] : PYPL (cible: PYPL)
+    Montant : $171,574.52
+    Nouvelle valeur cible : $171,574.55
+  [ACHAT] : EXEL (cible: EXEL)
+    Montant : $141,874.69
+    Nouvelle valeur cible : $141,874.69
+  [CONSERVER] : BAH (Allocation déjà correcte)
+  [CONSERVER] : ADBE (Allocation déjà correcte)
+  [LIQUIDATION] : CHTR (Non dans les cibles IA)
+    Montant : $34,340.05
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-652.59
+  [LIQUIDATION] : CTSH (Non dans les cibles IA)
+    Montant : $47,564.09
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $2,729.57
+  [LIQUIDATION] : SMCI (Non dans les cibles IA)
+    Montant : $9.03
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-0.73
+  [LIQUIDATION] : F (Non dans les cibles IA)
+    Montant : $79,232.23
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $90.21
+  [LIQUIDATION] : ANET (Non dans les cibles IA)
+    Montant : $76,101.04
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-3,925.35
+  [LIQUIDATION] : BIIB (Non dans les cibles IA)
+    Montant : $103,416.11
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $8,409.60
+  [LIQUIDATION] : FANG (Non dans les cibles IA)
+    Montant : $76,772.81
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-95.51
+  [LIQUIDATION] : BAC (Non dans les cibles IA)
+    Montant : $97,151.31
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $871.56
+  [LIQUIDATION] : CTAS (Non dans les cibles IA)
+    Montant : $3,945.69
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-42.54
+  [LIQUIDATION] : PANW (Non dans les cibles IA)
+    Montant : $46,991.08
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-5,405.83
+  [LIQUIDATION] : ON (Non dans les cibles IA)
+    Montant : $85,776.84
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $4,036.97
+  [LIQUIDATION] : FITB (Non dans les cibles IA)
+    Montant : $0.08
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $0.00
+  [LIQUIDATION] : NVDA (Non dans les cibles IA)
+    Montant : $0.00
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-0.00
+  [LIQUIDATION] : COF (Non dans les cibles IA)
+    Montant : $50,571.64
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $1,507.06
+----------------------------------------
+Note: Les P/L sont des estimations avant exécution.
+
+
+======================================================================
+ENREGISTREMENT DU : 2025-11-29 21:23:31
+======================================================================
+Equity total du compte : $997,442.64
+----------------------------------------
+Positions Actuelles (Portefeuille)
+  - ANET: $79,210.04 (Prix d'achat: $132.03)
+  - BAC: $98,593.93 (Prix d'achat: $52.39)
+  - BIIB: $102,974.62 (Prix d'achat: $168.00)
+  - CHTR: $34,510.78 (Prix d'achat: $202.91)
+  - COF: $51,028.19 (Prix d'achat: $210.64)
+  - CTAS: $3,996.39 (Prix d'achat: $185.64)
+  - CTSH: $0.02 (Prix d'achat: $72.53)
+  - F: $79,863.68 (Prix d'achat: $13.16)
+  - FANG: $78,770.59 (Prix d'achat: $148.91)
+  - FITB: $0.08 (Prix d'achat: $42.45)
+  - NVDA: $0.00 (Prix d'achat: $185.48)
+  - PANW: $48,419.07 (Prix d'achat: $205.75)
+  - PYPL: $0.03 (Prix d'achat: $62.47)
+  - SMCI: $9.30 (Prix d'achat: $35.53)
+----------------------------------------
+Allocations Cibles (IA)
+  - BAC: 6.79%
+  - CHTR: 20.80%
+  - COF: 0.00%
+  - FANG: 3.97%
+  - NVDA: 1.28%
+  - PYPL: 16.58%
+  - SMCI: 42.61%
+  - TSLA: 0.00%
+  - CASH: 7.96%
+----------------------------------------
+--- Ordres de Rebalancement Requis ---
+  [CONSERVER] : TSLA (Allocation déjà correcte)
+  [VENTE] : FANG (cible: FANG)
+    Montant : $39,143.20
+    Nouvelle valeur cible : $39,627.40
+    Profit/Perte Réalisé Estimé: $945.29
+  [ACHAT] : SMCI (cible: SMCI)
+    Montant : $425,030.12
+    Nouvelle valeur cible : $425,039.44
+  [VENTE] : BAC (cible: BAC)
+    Montant : $30,855.50
+    Nouvelle valeur cible : $67,738.42
+    Profit/Perte Réalisé Estimé: $724.23
+  [VENTE] : COF (cible: COF)
+    Montant : $51,028.19
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $1,963.61
+  [ACHAT] : NVDA (cible: NVDA)
+    Montant : $12,773.55
+    Nouvelle valeur cible : $12,773.55
+  [ACHAT] : CHTR (cible: CHTR)
+    Montant : $172,972.56
+    Nouvelle valeur cible : $207,483.34
+  [ACHAT] : PYPL (cible: PYPL)
+    Montant : $165,400.78
+    Nouvelle valeur cible : $165,400.81
+  [LIQUIDATION] : ANET (Non dans les cibles IA)
+    Montant : $79,210.04
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-816.35
+  [LIQUIDATION] : PANW (Non dans les cibles IA)
+    Montant : $48,419.07
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-3,977.84
+  [LIQUIDATION] : FITB (Non dans les cibles IA)
+    Montant : $0.08
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $0.00
+  [LIQUIDATION] : F (Non dans les cibles IA)
+    Montant : $79,863.68
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $721.66
+  [LIQUIDATION] : CTAS (Non dans les cibles IA)
+    Montant : $3,996.39
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $8.16
+  [LIQUIDATION] : BIIB (Non dans les cibles IA)
+    Montant : $102,974.62
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $7,968.11
+  [LIQUIDATION] : CTSH (Non dans les cibles IA)
+    Montant : $0.02
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $0.00
+----------------------------------------
+Note: Les P/L sont des estimations avant exécution.
+
+
+======================================================================
+ENREGISTREMENT DU : 2025-12-10 09:24:18
+======================================================================
+Equity total du compte : $1,000,702.56
+----------------------------------------
+Positions Actuelles (Portefeuille)
+  - ANET: $687.47 (Prix d'achat: $132.03)
+  - BAC: $98,391.78 (Prix d'achat: $52.39)
+  - BIIB: $99,440.15 (Prix d'achat: $168.00)
+  - CHTR: $35,374.76 (Prix d'achat: $202.91)
+  - COF: $30.29 (Prix d'achat: $210.64)
+  - CTAS: $3,934.74 (Prix d'achat: $185.64)
+  - CTSH: $0.02 (Prix d'achat: $72.53)
+  - F: $78,660.91 (Prix d'achat: $13.16)
+  - FANG: $81,651.12 (Prix d'achat: $148.91)
+  - FITB: $0.08 (Prix d'achat: $42.45)
+  - NVDA: $0.00 (Prix d'achat: $185.48)
+  - PANW: $143.02 (Prix d'achat: $205.75)
+  - PYPL: $0.03 (Prix d'achat: $62.47)
+  - SMCI: $9.63 (Prix d'achat: $35.53)
+----------------------------------------
+Allocations Cibles (IA)
+  - ADBE: 0.00%
+  - ADSK: 0.00%
+  - AMKR: 0.00%
+  - CHKP: 2.09%
+  - CSIQ: 17.02%
+  - ENTG: 0.00%
+  - NTAP: 1.20%
+  - ON: 3.79%
+  - OTEX: 3.31%
+  - QCOM: 0.00%
+  - QLYS: 0.00%
+  - TDC: 16.87%
+  - ZBRA: 0.00%
+  - CASH: 55.71%
+----------------------------------------
+--- Ordres de Rebalancement Requis ---
+  [ACHAT] : CSIQ (cible: CSIQ)
+    Montant : $170,356.55
+    Nouvelle valeur cible : $170,356.55
+  [CONSERVER] : ADSK (Allocation déjà correcte)
+  [CONSERVER] : ENTG (Allocation déjà correcte)
+  [CONSERVER] : QLYS (Allocation déjà correcte)
+  [ACHAT] : TDC (cible: TDC)
+    Montant : $168,843.08
+    Nouvelle valeur cible : $168,843.08
+  [ACHAT] : OTEX (cible: OTEX)
+    Montant : $33,083.06
+    Nouvelle valeur cible : $33,083.06
+  [CONSERVER] : ADBE (Allocation déjà correcte)
+  [CONSERVER] : AMKR (Allocation déjà correcte)
+  [ACHAT] : ON (cible: ON)
+    Montant : $37,917.53
+    Nouvelle valeur cible : $37,917.53
+  [ACHAT] : CHKP (cible: CHKP)
+    Montant : $20,944.64
+    Nouvelle valeur cible : $20,944.64
+  [ACHAT] : NTAP (cible: NTAP)
+    Montant : $12,057.42
+    Nouvelle valeur cible : $12,057.42
+  [CONSERVER] : ZBRA (Allocation déjà correcte)
+  [CONSERVER] : QCOM (Allocation déjà correcte)
+  [LIQUIDATION] : ANET (Non dans les cibles IA)
+    Montant : $687.47
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-10.50
+  [LIQUIDATION] : CTSH (Non dans les cibles IA)
+    Montant : $0.02
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $0.00
+  [LIQUIDATION] : BIIB (Non dans les cibles IA)
+    Montant : $99,440.15
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $4,433.64
+  [LIQUIDATION] : FITB (Non dans les cibles IA)
+    Montant : $0.08
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $0.00
+  [LIQUIDATION] : CHTR (Non dans les cibles IA)
+    Montant : $35,374.76
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $382.11
+  [LIQUIDATION] : CTAS (Non dans les cibles IA)
+    Montant : $3,934.74
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-53.49
+  [LIQUIDATION] : F (Non dans les cibles IA)
+    Montant : $78,660.91
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-481.11
+  [LIQUIDATION] : PYPL (Non dans les cibles IA)
+    Montant : $0.03
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-0.00
+  [LIQUIDATION] : NVDA (Non dans les cibles IA)
+    Montant : $0.00
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-0.00
+  [LIQUIDATION] : BAC (Non dans les cibles IA)
+    Montant : $98,391.78
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $2,112.03
+  [LIQUIDATION] : SMCI (Non dans les cibles IA)
+    Montant : $9.63
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-0.14
+  [LIQUIDATION] : COF (Non dans les cibles IA)
+    Montant : $30.29
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $2.65
+  [LIQUIDATION] : PANW (Non dans les cibles IA)
+    Montant : $143.02
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-7.88
+  [LIQUIDATION] : FANG (Non dans les cibles IA)
+    Montant : $81,651.12
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $4,782.81
+----------------------------------------
+Note: Les P/L sont des estimations avant exécution.
+
+
+======================================================================
+ENREGISTREMENT DU : 2025-12-11 10:06:42
+======================================================================
+Equity total du compte : $1,005,084.59
+----------------------------------------
+Positions Actuelles (Portefeuille)
+  - ANET: $1.27 (Prix d'achat: $132.03)
+  - BAC: $99,145.24 (Prix d'achat: $52.39)
+  - BIIB: $100,350.63 (Prix d'achat: $168.00)
+  - CHTR: $36,781.95 (Prix d'achat: $202.91)
+  - COF: $31.26 (Prix d'achat: $210.64)
+  - CTAS: $3,996.82 (Prix d'achat: $185.64)
+  - CTSH: $0.02 (Prix d'achat: $72.53)
+  - F: $80,404.92 (Prix d'achat: $13.16)
+  - FITB: $0.09 (Prix d'achat: $42.45)
+  - NVDA: $0.00 (Prix d'achat: $185.48)
+  - PANW: $141.35 (Prix d'achat: $205.75)
+  - PYPL: $0.03 (Prix d'achat: $62.47)
+  - SMCI: $9.43 (Prix d'achat: $35.53)
+----------------------------------------
+Allocations Cibles (IA)
+  - AAPL: 11.11%
+  - AMZN: 9.21%
+  - AXP: 0.00%
+  - CVX: 0.00%
+  - HEI: 14.93%
+  - JEF: 7.06%
+  - KO: 1.56%
+  - KR: 3.76%
+  - MA: 0.00%
+  - MCO: 5.22%
+  - NUE: 0.00%
+  - OXY: 11.12%
+  - POOL: 2.80%
+  - UNH: 17.73%
+  - V: 15.51%
+  - CASH: 0.00%
+----------------------------------------
+--- Ordres de Rebalancement Requis ---
+  [CONSERVER] : AXP (Allocation déjà correcte)
+  [ACHAT] : JEF (cible: JEF)
+    Montant : $70,929.05
+    Nouvelle valeur cible : $70,929.05
+  [ACHAT] : AMZN (cible: AMZN)
+    Montant : $92,528.65
+    Nouvelle valeur cible : $92,528.65
+  [ACHAT] : HEI (cible: HEI)
+    Montant : $150,023.03
+    Nouvelle valeur cible : $150,023.03
+  [CONSERVER] : CVX (Allocation déjà correcte)
+  [ACHAT] : OXY (cible: OXY)
+    Montant : $111,759.41
+    Nouvelle valeur cible : $111,759.41
+  [ACHAT] : V (cible: V)
+    Montant : $155,841.05
+    Nouvelle valeur cible : $155,841.05
+  [CONSERVER] : MA (Allocation déjà correcte)
+  [ACHAT] : POOL (cible: POOL)
+    Montant : $28,183.29
+    Nouvelle valeur cible : $28,183.29
+  [ACHAT] : UNH (cible: UNH)
+    Montant : $178,175.52
+    Nouvelle valeur cible : $178,175.52
+  [ACHAT] : KO (cible: KO)
+    Montant : $15,725.35
+    Nouvelle valeur cible : $15,725.35
+  [CONSERVER] : NUE (Allocation déjà correcte)
+  [ACHAT] : MCO (cible: MCO)
+    Montant : $52,498.43
+    Nouvelle valeur cible : $52,498.43
+  [ACHAT] : KR (cible: KR)
+    Montant : $37,745.11
+    Nouvelle valeur cible : $37,745.11
+  [ACHAT] : AAPL (cible: AAPL)
+    Montant : $111,675.69
+    Nouvelle valeur cible : $111,675.69
+  [LIQUIDATION] : CTSH (Non dans les cibles IA)
+    Montant : $0.02
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $0.00
+  [LIQUIDATION] : BAC (Non dans les cibles IA)
+    Montant : $99,145.24
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $2,865.49
+  [LIQUIDATION] : COF (Non dans les cibles IA)
+    Montant : $31.26
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $3.62
+  [LIQUIDATION] : CTAS (Non dans les cibles IA)
+    Montant : $3,996.82
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $8.59
+  [LIQUIDATION] : PANW (Non dans les cibles IA)
+    Montant : $141.35
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-9.55
+  [LIQUIDATION] : FITB (Non dans les cibles IA)
+    Montant : $0.09
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $0.01
+  [LIQUIDATION] : F (Non dans les cibles IA)
+    Montant : $80,404.92
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $1,262.90
+  [LIQUIDATION] : BIIB (Non dans les cibles IA)
+    Montant : $100,350.63
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $5,344.12
+  [LIQUIDATION] : PYPL (Non dans les cibles IA)
+    Montant : $0.03
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-0.00
+  [LIQUIDATION] : SMCI (Non dans les cibles IA)
+    Montant : $9.43
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-0.34
+  [LIQUIDATION] : CHTR (Non dans les cibles IA)
+    Montant : $36,781.95
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $1,789.31
+  [LIQUIDATION] : NVDA (Non dans les cibles IA)
+    Montant : $0.00
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-0.00
+  [LIQUIDATION] : ANET (Non dans les cibles IA)
+    Montant : $1.27
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-0.01
+----------------------------------------
+Note: Les P/L sont des estimations avant exécution.
+
+
+======================================================================
+ENREGISTREMENT DU : 2025-12-11 22:39:33
+======================================================================
+Equity total du compte : $1,002,104.43
+----------------------------------------
+Positions Actuelles (Portefeuille)
+  - ANET: $1.31 (Prix d'achat: $132.03)
+  - BIIB: $97,551.33 (Prix d'achat: $168.00)
+  - CHTR: $36,559.49 (Prix d'achat: $202.91)
+  - COF: $31.40 (Prix d'achat: $210.64)
+  - CTAS: $4,056.76 (Prix d'achat: $185.64)
+  - CTSH: $0.02 (Prix d'achat: $72.53)
+  - F: $112.20 (Prix d'achat: $13.16)
+  - FITB: $0.09 (Prix d'achat: $42.45)
+  - NVDA: $0.00 (Prix d'achat: $185.48)
+  - PANW: $139.61 (Prix d'achat: $205.75)
+  - PYPL: $0.03 (Prix d'achat: $62.47)
+----------------------------------------
+Allocations Cibles (IA)
+  - AAPL: 12.56%
+  - AMZN: 9.84%
+  - AXP: 0.00%
+  - CVX: 0.00%
+  - HEI: 14.76%
+  - JEF: 5.69%
+  - KO: 4.91%
+  - KR: 7.10%
+  - MA: 0.00%
+  - MCO: 2.09%
+  - NUE: 0.00%
+  - OXY: 6.99%
+  - POOL: 7.72%
+  - UNH: 13.40%
+  - V: 14.93%
+  - CASH: 0.00%
+----------------------------------------
+--- Ordres de Rebalancement Requis ---
+  [ACHAT] : JEF (cible: JEF)
+    Montant : $56,977.04
+    Nouvelle valeur cible : $56,977.04
+  [CONSERVER] : MA (Allocation déjà correcte)
+  [ACHAT] : OXY (cible: OXY)
+    Montant : $70,051.02
+    Nouvelle valeur cible : $70,051.02
+  [ACHAT] : MCO (cible: MCO)
+    Montant : $20,950.07
+    Nouvelle valeur cible : $20,950.07
+  [CONSERVER] : NUE (Allocation déjà correcte)
+  [CONSERVER] : AXP (Allocation déjà correcte)
+  [ACHAT] : AMZN (cible: AMZN)
+    Montant : $98,649.12
+    Nouvelle valeur cible : $98,649.12
+  [ACHAT] : KO (cible: KO)
+    Montant : $49,237.19
+    Nouvelle valeur cible : $49,237.19
+  [ACHAT] : AAPL (cible: AAPL)
+    Montant : $125,902.63
+    Nouvelle valeur cible : $125,902.63
+  [CONSERVER] : CVX (Allocation déjà correcte)
+  [ACHAT] : KR (cible: KR)
+    Montant : $71,170.60
+    Nouvelle valeur cible : $71,170.60
+  [ACHAT] : UNH (cible: UNH)
+    Montant : $134,301.83
+    Nouvelle valeur cible : $134,301.83
+  [ACHAT] : V (cible: V)
+    Montant : $149,614.61
+    Nouvelle valeur cible : $149,614.61
+  [ACHAT] : POOL (cible: POOL)
+    Montant : $77,387.95
+    Nouvelle valeur cible : $77,387.95
+  [ACHAT] : HEI (cible: HEI)
+    Montant : $147,862.31
+    Nouvelle valeur cible : $147,862.31
+  [LIQUIDATION] : CTSH (Non dans les cibles IA)
+    Montant : $0.02
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $0.00
+  [LIQUIDATION] : ANET (Non dans les cibles IA)
+    Montant : $1.31
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $0.03
+  [LIQUIDATION] : FITB (Non dans les cibles IA)
+    Montant : $0.09
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $0.01
+  [LIQUIDATION] : BIIB (Non dans les cibles IA)
+    Montant : $97,551.33
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $2,544.82
+  [LIQUIDATION] : COF (Non dans les cibles IA)
+    Montant : $31.40
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $3.76
+  [LIQUIDATION] : F (Non dans les cibles IA)
+    Montant : $112.20
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $4.02
+  [LIQUIDATION] : PYPL (Non dans les cibles IA)
+    Montant : $0.03
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-0.00
+  [LIQUIDATION] : PANW (Non dans les cibles IA)
+    Montant : $139.61
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-11.29
+  [LIQUIDATION] : CTAS (Non dans les cibles IA)
+    Montant : $4,056.76
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $68.53
+  [LIQUIDATION] : CHTR (Non dans les cibles IA)
+    Montant : $36,559.49
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $1,566.85
+  [LIQUIDATION] : NVDA (Non dans les cibles IA)
+    Montant : $0.00
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-0.00
+----------------------------------------
+Note: Les P/L sont des estimations avant exécution.
+
+
+======================================================================
+ENREGISTREMENT DU : 2025-12-11 22:50:43
+======================================================================
+Equity total du compte : $1,002,104.36
+----------------------------------------
+Positions Actuelles (Portefeuille)
+  - ANET: $1.30 (Prix d'achat: $132.03)
+  - BIIB: $97,551.33 (Prix d'achat: $168.00)
+  - CHTR: $36,559.49 (Prix d'achat: $202.91)
+  - COF: $31.40 (Prix d'achat: $210.64)
+  - CTAS: $4,056.76 (Prix d'achat: $185.64)
+  - CTSH: $0.02 (Prix d'achat: $72.53)
+  - F: $112.12 (Prix d'achat: $13.16)
+  - FITB: $0.09 (Prix d'achat: $42.45)
+  - NVDA: $0.00 (Prix d'achat: $185.48)
+  - PANW: $139.62 (Prix d'achat: $205.75)
+  - PYPL: $0.03 (Prix d'achat: $62.47)
+----------------------------------------
+Allocations Cibles (IA)
+  - AAPL: 12.56%
+  - AMZN: 9.84%
+  - AXP: 0.00%
+  - CVX: 0.00%
+  - HEI: 14.76%
+  - JEF: 5.69%
+  - KO: 4.91%
+  - KR: 7.10%
+  - MA: 0.00%
+  - MCO: 2.09%
+  - NUE: 0.00%
+  - OXY: 6.99%
+  - POOL: 7.72%
+  - UNH: 13.40%
+  - V: 14.93%
+  - CASH: 0.00%
+----------------------------------------
+--- Ordres de Rebalancement Requis ---
+  [ACHAT] : JEF (cible: JEF)
+    Montant : $56,977.04
+    Nouvelle valeur cible : $56,977.04
+  [CONSERVER] : MA (Allocation déjà correcte)
+  [ACHAT] : OXY (cible: OXY)
+    Montant : $70,051.02
+    Nouvelle valeur cible : $70,051.02
+  [ACHAT] : MCO (cible: MCO)
+    Montant : $20,950.07
+    Nouvelle valeur cible : $20,950.07
+  [CONSERVER] : NUE (Allocation déjà correcte)
+  [CONSERVER] : AXP (Allocation déjà correcte)
+  [ACHAT] : AMZN (cible: AMZN)
+    Montant : $98,649.12
+    Nouvelle valeur cible : $98,649.12
+  [ACHAT] : KO (cible: KO)
+    Montant : $49,237.18
+    Nouvelle valeur cible : $49,237.18
+  [ACHAT] : AAPL (cible: AAPL)
+    Montant : $125,902.62
+    Nouvelle valeur cible : $125,902.62
+  [CONSERVER] : CVX (Allocation déjà correcte)
+  [ACHAT] : KR (cible: KR)
+    Montant : $71,170.59
+    Nouvelle valeur cible : $71,170.59
+  [ACHAT] : UNH (cible: UNH)
+    Montant : $134,301.81
+    Nouvelle valeur cible : $134,301.81
+  [ACHAT] : V (cible: V)
+    Montant : $149,614.59
+    Nouvelle valeur cible : $149,614.59
+  [ACHAT] : POOL (cible: POOL)
+    Montant : $77,387.95
+    Nouvelle valeur cible : $77,387.95
+  [ACHAT] : HEI (cible: HEI)
+    Montant : $147,862.31
+    Nouvelle valeur cible : $147,862.31
+  [LIQUIDATION] : CTSH (Non dans les cibles IA)
+    Montant : $0.02
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $0.00
+  [LIQUIDATION] : ANET (Non dans les cibles IA)
+    Montant : $1.30
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $0.03
+  [LIQUIDATION] : FITB (Non dans les cibles IA)
+    Montant : $0.09
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $0.01
+  [LIQUIDATION] : BIIB (Non dans les cibles IA)
+    Montant : $97,551.33
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $2,544.82
+  [LIQUIDATION] : COF (Non dans les cibles IA)
+    Montant : $31.40
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $3.76
+  [LIQUIDATION] : F (Non dans les cibles IA)
+    Montant : $112.12
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $3.94
+  [LIQUIDATION] : PYPL (Non dans les cibles IA)
+    Montant : $0.03
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-0.00
+  [LIQUIDATION] : PANW (Non dans les cibles IA)
+    Montant : $139.62
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-11.28
+  [LIQUIDATION] : CTAS (Non dans les cibles IA)
+    Montant : $4,056.76
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $68.53
+  [LIQUIDATION] : CHTR (Non dans les cibles IA)
+    Montant : $36,559.49
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $1,566.85
+  [LIQUIDATION] : NVDA (Non dans les cibles IA)
+    Montant : $0.00
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-0.00
+----------------------------------------
+Note: Les P/L sont des estimations avant exécution.
+
+
+======================================================================
+ENREGISTREMENT DU : 2025-12-11 23:00:50
+======================================================================
+Equity total du compte : $1,002,103.91
+----------------------------------------
+Positions Actuelles (Portefeuille)
+  - ANET: $1.30 (Prix d'achat: $132.03)
+  - BIIB: $97,551.33 (Prix d'achat: $168.00)
+  - CHTR: $36,559.49 (Prix d'achat: $202.91)
+  - COF: $31.11 (Prix d'achat: $210.64)
+  - CTAS: $4,056.76 (Prix d'achat: $185.64)
+  - CTSH: $0.02 (Prix d'achat: $72.53)
+  - F: $111.96 (Prix d'achat: $13.16)
+  - FITB: $0.09 (Prix d'achat: $42.45)
+  - NVDA: $0.00 (Prix d'achat: $185.48)
+  - PANW: $139.62 (Prix d'achat: $205.75)
+  - PYPL: $0.03 (Prix d'achat: $62.47)
+----------------------------------------
+Allocations Cibles (IA)
+  - AAPL: 12.56%
+  - AMZN: 9.84%
+  - AXP: 0.00%
+  - CVX: 0.00%
+  - HEI: 14.76%
+  - JEF: 5.69%
+  - KO: 4.91%
+  - KR: 7.10%
+  - MA: 0.00%
+  - MCO: 2.09%
+  - NUE: 0.00%
+  - OXY: 6.99%
+  - POOL: 7.72%
+  - UNH: 13.40%
+  - V: 14.93%
+  - CASH: 0.00%
+----------------------------------------
+--- Ordres de Rebalancement Requis ---
+  [ACHAT] : AMZN (cible: AMZN)
+    Montant : $98,649.07
+    Nouvelle valeur cible : $98,649.07
+  [ACHAT] : HEI (cible: HEI)
+    Montant : $147,862.25
+    Nouvelle valeur cible : $147,862.25
+  [CONSERVER] : AXP (Allocation déjà correcte)
+  [CONSERVER] : MA (Allocation déjà correcte)
+  [ACHAT] : MCO (cible: MCO)
+    Montant : $20,950.06
+    Nouvelle valeur cible : $20,950.06
+  [ACHAT] : POOL (cible: POOL)
+    Montant : $77,387.91
+    Nouvelle valeur cible : $77,387.91
+  [ACHAT] : UNH (cible: UNH)
+    Montant : $134,301.77
+    Nouvelle valeur cible : $134,301.77
+  [CONSERVER] : NUE (Allocation déjà correcte)
+  [ACHAT] : KR (cible: KR)
+    Montant : $71,170.56
+    Nouvelle valeur cible : $71,170.56
+  [CONSERVER] : CVX (Allocation déjà correcte)
+  [ACHAT] : AAPL (cible: AAPL)
+    Montant : $125,902.57
+    Nouvelle valeur cible : $125,902.57
+  [ACHAT] : OXY (cible: OXY)
+    Montant : $70,050.98
+    Nouvelle valeur cible : $70,050.98
+  [ACHAT] : KO (cible: KO)
+    Montant : $49,237.16
+    Nouvelle valeur cible : $49,237.16
+  [ACHAT] : V (cible: V)
+    Montant : $149,614.53
+    Nouvelle valeur cible : $149,614.53
+  [ACHAT] : JEF (cible: JEF)
+    Montant : $56,977.01
+    Nouvelle valeur cible : $56,977.01
+  [LIQUIDATION] : COF (Non dans les cibles IA)
+    Montant : $31.11
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $3.47
+  [LIQUIDATION] : F (Non dans les cibles IA)
+    Montant : $111.96
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $3.78
+  [LIQUIDATION] : BIIB (Non dans les cibles IA)
+    Montant : $97,551.33
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $2,544.82
+  [LIQUIDATION] : CTAS (Non dans les cibles IA)
+    Montant : $4,056.76
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $68.53
+  [LIQUIDATION] : ANET (Non dans les cibles IA)
+    Montant : $1.30
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $0.03
+  [LIQUIDATION] : CHTR (Non dans les cibles IA)
+    Montant : $36,559.49
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $1,566.85
+  [LIQUIDATION] : NVDA (Non dans les cibles IA)
+    Montant : $0.00
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-0.00
+  [LIQUIDATION] : PYPL (Non dans les cibles IA)
+    Montant : $0.03
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-0.00
+  [LIQUIDATION] : CTSH (Non dans les cibles IA)
+    Montant : $0.02
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $0.00
+  [LIQUIDATION] : FITB (Non dans les cibles IA)
+    Montant : $0.09
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $0.01
+  [LIQUIDATION] : PANW (Non dans les cibles IA)
+    Montant : $139.62
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $-11.28
+----------------------------------------
+Note: Les P/L sont des estimations avant exécution.
+
+
+======================================================================
+ENREGISTREMENT DU : 2025-12-18 22:01:04
+======================================================================
+Equity total du compte : $984,516.53
+----------------------------------------
+Positions Actuelles (Portefeuille)
+  - AAPL: $123,627.37 (Prix d'achat: $277.20)
+  - AMZN: $97,550.98 (Prix d'achat: $229.27)
+  - HEI: $144,069.94 (Prix d'achat: $318.16)
+  - JEF: $55,247.01 (Prix d'achat: $63.84)
+  - KO: $50,096.95 (Prix d'achat: $69.15)
+  - KR: $71,660.10 (Prix d'achat: $62.36)
+  - MCO: $21,364.73 (Prix d'achat: $488.03)
+  - OXY: $67,197.57 (Prix d'achat: $41.49)
+  - POOL: $74,663.75 (Prix d'achat: $244.98)
+  - UNH: $130,214.44 (Prix d'achat: $338.44)
+  - V: $148,775.53 (Prix d'achat: $347.96)
+----------------------------------------
+Allocations Cibles (IA)
+  - AAPL: 13.68%
+  - AMZN: 19.27%
+  - AXP: 0.00%
+  - CVX: 0.00%
+  - HEI: 14.25%
+  - JEF: 5.97%
+  - KO: 0.00%
+  - KR: 11.81%
+  - MA: 0.00%
+  - MCO: 0.00%
+  - NUE: 0.00%
+  - OXY: 8.23%
+  - POOL: 4.73%
+  - UNH: 7.38%
+  - V: 14.69%
+  - CASH: 0.00%
+----------------------------------------
+--- Ordres de Rebalancement Requis ---
+  [VENTE] : HEI (cible: HEI)
+    Montant : $3,817.38
+    Nouvelle valeur cible : $140,252.56
+    Profit/Perte Réalisé Estimé: $-100.48
+  [CONSERVER] : CVX (Allocation déjà correcte)
+  [CONSERVER] : NUE (Allocation déjà correcte)
+  [VENTE] : UNH (cible: UNH)
+    Montant : $57,551.41
+    Nouvelle valeur cible : $72,663.03
+    Profit/Perte Réalisé Estimé: $-1,806.48
+  [CONSERVER] : MA (Allocation déjà correcte)
+  [VENTE] : V (cible: V)
+    Montant : $4,187.52
+    Nouvelle valeur cible : $144,588.02
+    Profit/Perte Réalisé Estimé: $-23.61
+  [ACHAT] : JEF (cible: JEF)
+    Montant : $3,508.52
+    Nouvelle valeur cible : $58,755.52
+  [ACHAT] : AMZN (cible: AMZN)
+    Montant : $92,124.77
+    Nouvelle valeur cible : $189,675.75
+  [ACHAT] : OXY (cible: OXY)
+    Montant : $13,802.63
+    Nouvelle valeur cible : $81,000.20
+  [CONSERVER] : AXP (Allocation déjà correcte)
+  [ACHAT] : KR (cible: KR)
+    Montant : $44,655.03
+    Nouvelle valeur cible : $116,315.12
+  [VENTE] : KO (cible: KO)
+    Montant : $50,096.95
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $859.81
+  [VENTE] : MCO (cible: MCO)
+    Montant : $21,364.73
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $414.68
+  [VENTE] : POOL (cible: POOL)
+    Montant : $28,128.42
+    Nouvelle valeur cible : $46,535.33
+    Profit/Perte Réalisé Estimé: $-1,025.88
+  [ACHAT] : AAPL (cible: AAPL)
+    Montant : $11,103.60
+    Nouvelle valeur cible : $134,730.97
+----------------------------------------
+Note: Les P/L sont des estimations avant exécution.
+
+
+======================================================================
+ENREGISTREMENT DU : 2026-01-11 14:37:08
+======================================================================
+Equity total du compte : $1,024,799.93
+----------------------------------------
+Positions Actuelles (Portefeuille)
+  - AAPL: $128,381.65 (Prix d'achat: $276.79)
+  - AMZN: $206,767.78 (Prix d'achat: $228.24)
+  - HEI: $160,044.87 (Prix d'achat: $318.16)
+  - JEF: $59,041.90 (Prix d'achat: $63.77)
+  - KO: $50,203.75 (Prix d'achat: $69.15)
+  - KR: $110,031.16 (Prix d'achat: $62.64)
+  - MCO: $22,820.84 (Prix d'achat: $488.03)
+  - OXY: $87,196.74 (Prix d'achat: $41.22)
+  - POOL: $49,301.99 (Prix d'achat: $244.98)
+  - UNH: $76,302.35 (Prix d'achat: $338.44)
+  - V: $146,168.62 (Prix d'achat: $347.96)
+----------------------------------------
+Allocations Cibles (IA)
+  - AAPL: 4.40%
+  - AMZN: 7.12%
+  - AXP: 0.00%
+  - CVX: 0.00%
+  - HEI: 0.00%
+  - JEF: 1.74%
+  - KO: 0.00%
+  - KR: 19.92%
+  - MA: 0.00%
+  - MCO: 0.00%
+  - NUE: 0.00%
+  - OXY: 8.68%
+  - POOL: 0.00%
+  - UNH: 0.00%
+  - V: 0.00%
+  - CASH: 58.14%
+----------------------------------------
+--- Ordres de Rebalancement Requis ---
+  [VENTE] : MCO (cible: MCO)
+    Montant : $22,820.84
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $1,870.79
+  [ACHAT] : OXY (cible: OXY)
+    Montant : $1,790.33
+    Nouvelle valeur cible : $88,987.06
+  [VENTE] : JEF (cible: JEF)
+    Montant : $41,198.26
+    Nouvelle valeur cible : $17,843.64
+    Profit/Perte Réalisé Estimé: $-1,007.36
+  [CONSERVER] : MA (Allocation déjà correcte)
+  [VENTE] : AMZN (cible: AMZN)
+    Montant : $133,843.44
+    Nouvelle valeur cible : $72,924.35
+    Profit/Perte Réalisé Estimé: $10,353.11
+  [CONSERVER] : AXP (Allocation déjà correcte)
+  [CONSERVER] : NUE (Allocation déjà correcte)
+  [VENTE] : POOL (cible: POOL)
+    Montant : $49,301.99
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $1,426.53
+  [VENTE] : KO (cible: KO)
+    Montant : $50,203.75
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $966.61
+  [VENTE] : UNH (cible: UNH)
+    Montant : $76,302.35
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $1,228.89
+  [VENTE] : V (cible: V)
+    Montant : $146,168.62
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $755.89
+  [VENTE] : HEI (cible: HEI)
+    Montant : $160,044.87
+    Nouvelle valeur cible : $0.00
+    Profit/Perte Réalisé Estimé: $16,024.40
+  [CONSERVER] : CVX (Allocation déjà correcte)
+  [VENTE] : AAPL (cible: AAPL)
+    Montant : $83,306.31
+    Nouvelle valeur cible : $45,075.35
+    Profit/Perte Réalisé Estimé: $-5,596.39
+  [ACHAT] : KR (cible: KR)
+    Montant : $94,152.77
+    Nouvelle valeur cible : $204,183.92
+----------------------------------------
+Note: Les P/L sont des estimations avant exécution.
+
+
