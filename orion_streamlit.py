@@ -427,36 +427,71 @@ with tab3:
 # --- TAB 4: POSITIONS ALPACA ---
 with tab4:
     st.header("Positions Ouvertes (Live)")
-    if st.button("🔄 Rafraîchir les Positions"):
+    
+    # Bouton principal de rafraîchissement
+    if st.button("🔄 Rafraîchir les Positions", use_container_width=True):
         if st.session_state.alpaca_connected:
             try:
                 positions = st.session_state.api_instance.list_positions()
                 if not positions:
                     st.info("Aucune position ouverte sur Alpaca.")
+                    st.session_state.alpaca_positions_list = []
                 else:
                     pos_data = []
                     for p in positions:
+                        pnl_pct = float(p.unrealized_plpc) * 100
+                        # --- LOGIQUE EXPERT (Money Management) ---
+                        if pnl_pct > 5.0:
+                            advice = "🎯 TAKE PROFIT"
+                            color = "#4CAF50" # Vert
+                        elif pnl_pct < -3.0:
+                            advice = "🛑 STOP LOSS"
+                            color = "#F44336" # Rouge
+                        else:
+                            advice = "⏳ HOLD"
+                            color = "#FF9800" # Orange
+                            
                         pos_data.append({
-                            "Actif": p.symbol,
-                            "Quantité": p.qty,
-                            "Prix Moyen": f"${float(p.avg_entry_price):.2f}",
-                            "Prix Actuel": f"${float(p.current_price):.2f}",
-                            "Valeur Marché": f"${float(p.market_value):.2f}",
-                            "PnL Total ($)": f"${float(p.unrealized_pl):.2f}",
-                            "PnL Total (%)": f"{float(p.unrealized_plpc)*100:.2f}%"
+                            "symbol": p.symbol,
+                            "qty": p.qty,
+                            "avg_entry": float(p.avg_entry_price),
+                            "current": float(p.current_price),
+                            "market_value": float(p.market_value),
+                            "pnl_usd": float(p.unrealized_pl),
+                            "pnl_pct": pnl_pct,
+                            "advice": advice,
+                            "color": color
                         })
-                    df_positions = pd.DataFrame(pos_data)
-                    st.session_state.alpaca_positions = df_positions
+                    st.session_state.alpaca_positions_list = pos_data
             except Exception as e:
                 st.error(f"Erreur de récupération: {e}")
         else:
-            st.error("Veuillez vous connecter à Alpaca d'abord.")
+            st.error("Veuillez vous connecter à Alpaca d'abord (Barre latérale).")
             
-    if not st.session_state.alpaca_positions.empty:
-        st.dataframe(
-            st.session_state.alpaca_positions.style.map(
-                lambda val: 'color: green;' if float(val.strip('%$')) > 0 else 'color: red;',
-                subset=['PnL Total ($)', 'PnL Total (%)']
-            ),
-            use_container_width=True
-        )
+    # Affichage des cartes interactives
+    if 'alpaca_positions_list' in st.session_state and st.session_state.alpaca_positions_list:
+        for pos in st.session_state.alpaca_positions_list:
+            with st.container():
+                st.markdown(f"### {pos['symbol']} <span style='font-size:16px;color:#888;'>(Qté: {pos['qty']})</span>", unsafe_allow_html=True)
+                col1, col2, col3, col4 = st.columns(4)
+                col1.metric("Valeur", f"${pos['market_value']:.2f}", f"${pos['current']:.2f}/u")
+                col2.metric("P&L ($)", f"${pos['pnl_usd']:.2f}")
+                col3.metric("P&L (%)", f"{pos['pnl_pct']:.2f}%")
+                col4.markdown(f"**Avis Expert:** <br><span style='color:{pos['color']}; font-weight:bold; font-size:18px;'>{pos['advice']}</span>", unsafe_allow_html=True)
+                
+                if st.button(f"🔴 VENDRE {pos['symbol']}", key=f"sell_btn_{pos['symbol']}"):
+                    if st.session_state.alpaca_connected:
+                        try:
+                            st.session_state.api_instance.submit_order(
+                                symbol=pos['symbol'],
+                                qty=pos['qty'],
+                                side='sell',
+                                type='market',
+                                time_in_force='day'
+                            )
+                            st.success(f"✅ Ordre de Vente (Market) envoyé pour {pos['symbol']} ! Cliquez sur Rafraîchir pour mettre à jour.")
+                        except Exception as e:
+                            st.error(f"Échec de l'ordre de vente: {e}")
+                    else:
+                        st.error("Non connecté à Alpaca.")
+                st.markdown("---")
